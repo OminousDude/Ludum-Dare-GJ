@@ -8,13 +8,12 @@ using UnityEngine.UI;
 public class EnemyHealthScript : MonoBehaviour
 {
     [SerializeField] float health, maxHealth = 3f;
-    [SerializeField] float moveSpeed = 5f;
     Rigidbody2D rb;
     public GameObject hb;
     public bool isHit;
     public float time;
+    public bool canBeHit;
 
-    float speed = 0.01f;
     [SerializeField] FloatingHealthBar healthBar;
 
     private void Awake()
@@ -25,6 +24,7 @@ public class EnemyHealthScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canBeHit = false;
         isHit = false;
         hb.SetActive(false);
         health = maxHealth;
@@ -34,7 +34,7 @@ public class EnemyHealthScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.E) && canBeHit)
         {
             time = 0;
             time += Time.deltaTime;
@@ -56,6 +56,20 @@ public class EnemyHealthScript : MonoBehaviour
             isHit = false;
         }
 
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            canBeHit = true;
+        }
+    }
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+         if (collision.gameObject.layer == 8)
+        {
+            canBeHit = false;
+        }
     }
     public void hideHealth()
     {
