@@ -11,6 +11,10 @@ public class EnemyAi : MonoBehaviour
     Vector2 moveDirection;
     bool grounded = false;
 
+    float t = 0f;
+    [SerializeField][Range(0f, 4f)] float lerpTime = 4f;
+    bool isCorrecting = false;
+
 
     private void Awake()
     {
@@ -26,11 +30,26 @@ public class EnemyAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target && grounded)
+        if (isCorrecting) {
+            rb.transform.eulerAngles = Vector2.Lerp(rb.transform.eulerAngles, new Vector2(0, 0), lerpTime * Time.deltaTime);
+
+            t = Mathf.Lerp(t, 1f, lerpTime * Time.deltaTime);
+
+            if (t > 0.9f)
+            {
+                t = 0f;
+                isCorrecting = false;
+                rb.freezeRotation = true;
+            }
+        }
+
+        if (target && grounded && !isCorrecting)
         {
             Vector2 direction = (target.position - transform.position).normalized;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
-            rb.rotation = angle;
+            // float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
+            // Debug.Log("Direction x : " + direction.x + "; Angle : " + angle);
+            // rb.rotation = angle;
+            rb.transform.eulerAngles = new Vector2(0, direction.x > 0 ? 180 : 0);
             moveDirection = direction;
         }
     }
@@ -43,11 +62,12 @@ public class EnemyAi : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == 3 && !grounded)
         {
             grounded = true;
+            isCorrecting = true;
         }
     }
 
@@ -56,6 +76,8 @@ public class EnemyAi : MonoBehaviour
         if (collision.gameObject.layer == 3 && grounded)
         {
             grounded = false;
+            rb.freezeRotation = false;
+            isCorrecting = false;
         }
     }
 }
