@@ -92,14 +92,7 @@ public class Movement : MonoBehaviour
         jumpParticle.Play();
     }
 
-    private void Walk(Vector2 dir)
-    {
-        if (!canMove)
-            return;
-
-        if (wallGrab)
-            return;
-
+    private void Walk(Vector2 dir) {
         if (!wallJumped)
         {
             rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
