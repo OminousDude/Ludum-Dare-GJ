@@ -51,7 +51,6 @@ public class EnemyHealthScript : MonoBehaviour
             Vector2 directionVec = isLeftHit ? new Vector2(0.7f, 0.5f) : new Vector2(-0.7f, 0.5f);
             enemyAi.grounded = false;
             rb.AddForce(directionVec * bounce, ForceMode2D.Impulse);
-            Debug.Log("Direction vector : " + directionVec);
         }
         else if (isHit)
         {

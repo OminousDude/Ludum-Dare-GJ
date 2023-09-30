@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyBounce : MonoBehaviour
 {
     public bool shouldBounce = true;
-    private int bounceCount = 0;
 
     [SerializeField]
     private Rigidbody2D rigidBody;

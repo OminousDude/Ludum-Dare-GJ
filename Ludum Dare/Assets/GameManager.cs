@@ -11,43 +11,50 @@ public class GameManager : MonoBehaviour
     public GameState currentState;
     public static event Action<GameState> onStateChange;
     private int currentLevel;
-    private int numberEnemies;
-    private int maxEnemies;
+    public int numberEnemies;
+    public int maxEnemies;
     private int numberDeadEnemies;
-    private int capacityEnemies;
+    public int capacityEnemies;
     private bool levelChanged;
 
     void Awake(){
-        Instance = this;
-
+        if (Instance == null) // If there is no instance already
+        {
+            DontDestroyOnLoad(gameObject); // Keep the GameObject, this component is attached to, across different scenes
+            Instance = this;
+        }
+        else if (Instance != this) // If there is already an instance and it's not `this` instance
+        {
+            Destroy(gameObject); // Destroy the GameObject, this component is attached to
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        levelChanged = false;
-        maxEnemies = 6;
-        currentLevel = 1;
-        capacityEnemies = maxEnemies/2;
-        numberEnemies = 0;
-        numberDeadEnemies = 0;
-        UpdateGameState(GameState.StartMenu);
-        floorLevel.text = currentLevel.ToString();
+        Instance.levelChanged = false;
+        Instance.maxEnemies = 6;
+        Instance.currentLevel = 1;
+        Instance.capacityEnemies = Instance.maxEnemies/2;
+        Instance.numberEnemies = 0;
+        Instance.numberDeadEnemies = 0;
+        Instance.UpdateGameState(GameState.StartMenu);
+        Instance.floorLevel.text = Instance.currentLevel.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (numberDeadEnemies == maxEnemies && !levelChanged)
+        if (Instance.numberDeadEnemies == Instance.maxEnemies && !Instance.levelChanged)
         {
             levelChanged = true;
             UpdateGameState(GameState.LevelTransition);
         }
-        if(numberEnemies >= capacityEnemies * 0.7)
+        if(Instance.numberEnemies >= Instance.capacityEnemies * 0.7)
         {
             UpdateGameState(GameState.Warning);
         }
-        if (currentState == GameState.Warning && numberEnemies < capacityEnemies * 0.7)
+        if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7)
         {
             UpdateGameState(GameState.Alive);
         }
@@ -55,7 +62,7 @@ public class GameManager : MonoBehaviour
         {
             UpdateGameState(GameState.PauseMenu);
         }
-        if(numberEnemies == capacityEnemies)
+        if(Instance.numberEnemies == Instance.capacityEnemies)
         {
             UpdateGameState(GameState.GameOver);
         }
@@ -63,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     public void UpdateGameState(GameState newState)
     {
-        currentState = newState;
+        Instance.currentState = newState;
 
         switch (newState)
         {
@@ -73,16 +80,16 @@ public class GameManager : MonoBehaviour
             case GameState.PauseMenu:
                 break;
             case GameState.LevelTransition:
-                currentLevel++;
-                floorLevel.text = currentLevel.ToString();
-                maxEnemies = 6 * currentLevel;
-                numberEnemies = maxEnemies;
-                UpdateGameState(GameState.Alive);
+                Instance.currentLevel++;
+                Instance.floorLevel.text = Instance.currentLevel.ToString();
+                Instance.maxEnemies = 6 * Instance.currentLevel;
+                Instance.numberEnemies = Instance.maxEnemies;
+                Instance.UpdateGameState(GameState.Alive);
                 break; 
             case GameState.Warning:
                 break; 
             case GameState.Alive:
-                levelChanged = false;
+                Instance.levelChanged = false;
                 break; 
             case GameState.GameOver:
                 break;
