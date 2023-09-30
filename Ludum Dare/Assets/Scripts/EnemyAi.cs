@@ -9,7 +9,7 @@ public class EnemyAi : MonoBehaviour
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
-    bool grounded = false;
+    public bool grounded = false;
 
     float t = 0f;
     [SerializeField][Range(0f, 4f)] float lerpTime = 4f;
@@ -73,7 +73,7 @@ public class EnemyAi : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3 && grounded)
+        if (collision.gameObject.layer == 3)
         {
             grounded = false;
             rb.freezeRotation = false;

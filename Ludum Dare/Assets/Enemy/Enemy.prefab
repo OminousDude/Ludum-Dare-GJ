@@ -180,6 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  grounded: 0
+  lerpTime: 4
 --- !u!114 &4221200599522584488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -199,6 +201,8 @@ MonoBehaviour:
   time: 0
   canBeHit: 0
   healthBar: {fileID: 7489980776437995004}
+  bounce: 50
+  enemyAi: {fileID: 5397364468901140684}
 --- !u!61 &4481118998768921234
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -31,4 +31,12 @@ public class EnemyBounce : MonoBehaviour
             shouldBounce = false;
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!shouldBounce && collision.gameObject.layer == 3)
+        {
+            shouldBounce = true;
+        }
+    }
 }
