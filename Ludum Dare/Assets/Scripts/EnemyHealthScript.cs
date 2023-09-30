@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyHealthScript : MonoBehaviour
 {
@@ -13,8 +14,12 @@ public class EnemyHealthScript : MonoBehaviour
     public bool isHit;
     public float time;
     public bool canBeHit;
+    bool isLeftHit = true;
 
     [SerializeField] FloatingHealthBar healthBar;
+
+    [SerializeField] float bounce = 50f;
+    public EnemyAi enemyAi;
 
     private void Awake()
     {
@@ -43,7 +48,9 @@ public class EnemyHealthScript : MonoBehaviour
             hb.SetActive(true);
             TakeDamage(1f);
             isHit = true;
-
+            Vector2 directionVec = isLeftHit ? new Vector2(0.7f, 0.5f) : new Vector2(-0.7f, 0.5f);
+            enemyAi.grounded = false;
+            rb.AddForce(directionVec * bounce, ForceMode2D.Impulse);
         }
         else if (isHit)
         {
@@ -63,6 +70,7 @@ public class EnemyHealthScript : MonoBehaviour
         if (collision.gameObject.layer == 8)
         {
             canBeHit = true;
+            isLeftHit = (collision.gameObject.transform.position - transform.position).normalized.x < 0;
         }
     }
     public void OnTriggerExit2D(Collider2D collision)

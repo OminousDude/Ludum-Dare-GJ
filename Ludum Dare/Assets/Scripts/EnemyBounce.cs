@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyBounce : MonoBehaviour
 {
     public bool shouldBounce = true;
-    private int bounceCount = 0;
 
     [SerializeField]
     private Rigidbody2D rigidBody;
@@ -29,6 +28,14 @@ public class EnemyBounce : MonoBehaviour
         } else if (shouldBounce && collision.gameObject.layer == 3)
         {
             shouldBounce = false;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (!shouldBounce && collision.gameObject.layer == 3)
+        {
+            shouldBounce = true;
         }
     }
 }
