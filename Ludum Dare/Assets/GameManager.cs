@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private int numberDeadEnemies;
     public int capacityEnemies;
     private bool levelChanged;
+    public GameObject pauseObject;
+    private bool pauseIsActive;
 
     void Awake(){
         if (Instance == null) // If there is no instance already
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pauseIsActive = false;
         Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         Instance.numberDeadEnemies = 0;
         Instance.UpdateGameState(GameState.StartMenu);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
+        pauseObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -78,6 +82,8 @@ public class GameManager : MonoBehaviour
 
                 break; 
             case GameState.PauseMenu:
+                pauseIsActive = !pauseIsActive;
+                pauseObject.SetActive(pauseIsActive);
                 break;
             case GameState.LevelTransition:
                 Instance.currentLevel++;
@@ -99,6 +105,28 @@ public class GameManager : MonoBehaviour
         }
 
         onStateChange?.Invoke(newState);
+    }
+    public void resumeIsPressed()
+    {
+        pauseIsActive = !pauseIsActive;
+        pauseObject.SetActive(pauseIsActive);
+    }   
+    public void restartIsPressed()
+    {
+        pauseIsActive = false;
+        Instance.levelChanged = false;
+        Instance.maxEnemies = 6;
+        Instance.currentLevel = 1;
+        Instance.capacityEnemies = Instance.maxEnemies / 2;
+        Instance.numberEnemies = 0;
+        Instance.numberDeadEnemies = 0;
+        Instance.UpdateGameState(GameState.StartMenu);
+        Instance.floorLevel.text = Instance.currentLevel.ToString();
+        pauseObject.SetActive(false);
+    }   
+    public void homeIsPressed()
+    {
+       //Go back to main menu screen
     }
 
     public enum GameState
