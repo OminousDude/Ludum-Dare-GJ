@@ -40,7 +40,7 @@ public class EnemyHealthScript : MonoBehaviour
             time += Time.deltaTime;
             //Debug.Log(time);
             hb.SetActive(true);
-            TakeDamage(0.1f);
+            TakeDamage(1f);
             isHit = true;
 
         }
