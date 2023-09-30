@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: eb12137ac9aaf1b4a86fd65413ac5d83
+guid: f9960b6e6da93444f89f5bacdfbe123c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dev_PlayerEnemy_0
+      name: Dev_Healthbar_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 32
-        height: 64
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f764d942762fa274ea1b54ab7edb3780
-      internalID: -57354043
+      spriteID: bf9fd0c0a33af1b4abd2e94b4a4f220a
+      internalID: 303312667
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dev_PlayerEnemy_1
+      name: Dev_Healthbar_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
         width: 32
-        height: 64
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28511ace881685d46a293cb48a28684b
-      internalID: -596091020
+      spriteID: 67aa86e63a6dbd247a85cc204e9f6eec
+      internalID: -1525284126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dev_Healthbar_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a959b291b5b6564db440a136a78f59d
+      internalID: 1981391599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dev_Healthbar_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7683e3f982c8b34983bf2a7665808b9
+      internalID: 1622658595
       vertices: []
       indices: 
       edges: []
@@ -175,8 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Dev_PlayerEnemy_0: -57354043
-      Dev_PlayerEnemy_1: -596091020
+      Dev_Healthbar_0: 303312667
+      Dev_Healthbar_1: -1525284126
+      Dev_Healthbar_2: 1981391599
+      Dev_Healthbar_3: 1622658595
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

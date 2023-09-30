@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 78219d50c673c744f98cf54ef41a91eb
+guid: d6ecdebeba2734840af4b2ccebf614eb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -123,13 +123,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Proto_Level_Sht_0
+      name: ElevatorExtra_anim_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 352
-        height: 272
+        width: 480
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +137,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5dc9e80c7a8fc8448ac95184a718f0f
-      internalID: 1577167776
+      spriteID: f9198fa58f5d156489dac6b76b17e782
+      internalID: -1911222467
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proto_Level_Sht_1
+      name: ElevatorExtra_anim_1
       rect:
         serializedVersion: 2
-        x: 352
+        x: 480
         y: 0
-        width: 352
-        height: 272
+        width: 480
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,20 +158,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 74ffe695778be5d4d8004c0f2f48d27b
-      internalID: 1004320079
+      spriteID: 11bcbfa116ec88f4fbc1141c90bbe2da
+      internalID: 648524446
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proto_Level_Sht_2
+      name: ElevatorExtra_anim_2
       rect:
         serializedVersion: 2
-        x: 704
+        x: 960
         y: 0
-        width: 352
-        height: 272
+        width: 480
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,20 +179,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae319d9ec6d430c4390a74deb057d2d7
-      internalID: 335454954
+      spriteID: 5b2531e549b5a534b9f4652bfa152809
+      internalID: -805613283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proto_Level_Sht_3
+      name: ElevatorExtra_anim_3
       rect:
         serializedVersion: 2
-        x: 1056
+        x: 1440
         y: 0
-        width: 352
-        height: 272
+        width: 480
+        height: 304
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4421757f2727f014692aaab875c7af75
-      internalID: 588885679
+      spriteID: 467ce393b4e9390438f71fda1a68e5cb
+      internalID: 1637273649
       vertices: []
       indices: 
       edges: []
@@ -217,10 +217,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Proto_Level_Sht_0: 1577167776
-      Proto_Level_Sht_1: 1004320079
-      Proto_Level_Sht_2: 335454954
-      Proto_Level_Sht_3: 588885679
+      ElevatorExtra_anim_0: -1911222467
+      ElevatorExtra_anim_1: 648524446
+      ElevatorExtra_anim_2: -805613283
+      ElevatorExtra_anim_3: 1637273649
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
