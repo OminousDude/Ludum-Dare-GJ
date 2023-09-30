@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public int numberDeadEnemies;
     public int capacityEnemies;
     private bool levelChanged;
+    public GameObject pauseObject;
+    private bool pauseIsActive;
 
     void Awake(){
         if (Instance == null) // If there is no instance already
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance.pauseIsActive = false;
         Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         Instance.numberDeadEnemies = 0;
         Instance.UpdateGameState(GameState.StartMenu);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
+        Instance.pauseObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -78,6 +82,8 @@ public class GameManager : MonoBehaviour
 
                 break; 
             case GameState.PauseMenu:
+                pauseIsActive = !pauseIsActive;
+                pauseObject.SetActive(pauseIsActive);
                 break;
             case GameState.LevelTransition:
                 Instance.currentLevel++;
@@ -99,6 +105,29 @@ public class GameManager : MonoBehaviour
         }
 
         onStateChange?.Invoke(newState);
+    }
+    public void resumeIsPressed()
+    {
+        Instance.pauseIsActive = !pauseIsActive;
+        Instance.pauseObject.SetActive(pauseIsActive);
+        Instance.UpdateGameState(GameState.Alive);
+    }   
+    public void restartIsPressed()
+    {
+        Instance.pauseIsActive = false;
+        Instance.levelChanged = false;
+        Instance.maxEnemies = 6;
+        Instance.currentLevel = 1;
+        Instance.capacityEnemies = Instance.maxEnemies / 2;
+        Instance.numberEnemies = 0;
+        Instance.numberDeadEnemies = 0;
+        Instance.floorLevel.text = Instance.currentLevel.ToString();
+        Instance.pauseObject.SetActive(false);
+        Instance.UpdateGameState(GameState.Alive);
+    }   
+    public void homeIsPressed()
+    {
+       //Go back to main menu screen
     }
 
     public enum GameState
