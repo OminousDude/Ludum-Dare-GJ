@@ -36,7 +36,6 @@ public class GameManager : MonoBehaviour
     {
         Instance.pauseIsActive = false;
         Instance.levelChanged = false;
-        Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
         Instance.capacityEnemies = Instance.maxEnemies/2;
         Instance.numberEnemies = 0;

@@ -201,7 +201,7 @@ MonoBehaviour:
   time: 0
   canBeHit: 0
   healthBar: {fileID: 7489980776437995004}
-  bounce: 50
+  bounce: 25
   enemyAi: {fileID: 5397364468901140684}
 --- !u!61 &4481118998768921234
 BoxCollider2D:
