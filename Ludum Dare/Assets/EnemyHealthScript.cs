@@ -10,10 +10,7 @@ public class EnemyHealthScript : MonoBehaviour
     [SerializeField] float health, maxHealth = 3f;
     [SerializeField] float moveSpeed = 5f;
     Rigidbody2D rb;
-    Transform target;
-    Vector2 moveDirection;
     public GameObject hb;
-    public GameObject b;
     public bool isHit;
     public float time;
   
@@ -32,17 +29,11 @@ public class EnemyHealthScript : MonoBehaviour
         hb.SetActive(false);
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
-        target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-
-        gameObject.transform.position = new Vector2(transform.position.x + (h * speed), transform.position.y + (v * speed));
-        
             if (Input.GetKeyDown(KeyCode.B))
         {
             time = 0;
