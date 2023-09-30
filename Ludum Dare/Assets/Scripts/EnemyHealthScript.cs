@@ -39,13 +39,14 @@ public class EnemyHealthScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (Input.GetKeyDown(KeyCode.E) && canBeHit)
         {
             time = 0;
             time += Time.deltaTime;
             //Debug.Log(time);
             hb.SetActive(true);
-            TakeDamage(0.1f);
+            TakeDamage(1f);
             isHit = true;
             Vector2 directionVec = isLeftHit ? new Vector2(0.7f, 0.5f) : new Vector2(-0.7f, 0.5f);
             enemyAi.grounded = false;
