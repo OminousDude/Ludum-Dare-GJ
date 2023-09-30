@@ -21,6 +21,8 @@ public class EnemyHealthScript : MonoBehaviour
     [SerializeField] float bounce = 50f;
     public EnemyAi enemyAi;
 
+    private GameManager gameManager;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -34,6 +36,7 @@ public class EnemyHealthScript : MonoBehaviour
         hb.SetActive(false);
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
+        gameManager = GameManager.Instance;
     }
 
     // Update is called once per frame
@@ -96,6 +99,8 @@ public class EnemyHealthScript : MonoBehaviour
     void Die()
     {
         //GetComponent<LootBag>().InstantiateLoot(transform.position);
+        gameManager.numberEnemies--;
+        gameManager.numberDeadEnemies++;
         Destroy(gameObject);
         Destroy(rb);
     }

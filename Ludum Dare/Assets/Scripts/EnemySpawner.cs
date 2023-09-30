@@ -27,8 +27,12 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
+        gameManager.numberEnemies++;
         enemyCount++;
-        yield return new WaitForSeconds(interval);
+        if (enemyCount > 0)
+        {
+            yield return new WaitForSeconds(interval);
+        }
 
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
 

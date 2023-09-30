@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private int currentLevel;
     public int numberEnemies;
     public int maxEnemies;
-    private int numberDeadEnemies;
+    public int numberDeadEnemies;
     public int capacityEnemies;
     private bool levelChanged;
 
@@ -47,24 +47,24 @@ public class GameManager : MonoBehaviour
     {
         if (Instance.numberDeadEnemies == Instance.maxEnemies && !Instance.levelChanged)
         {
-            levelChanged = true;
-            UpdateGameState(GameState.LevelTransition);
+            Instance.levelChanged = true;
+            Instance.UpdateGameState(GameState.LevelTransition);
         }
         if(Instance.numberEnemies >= Instance.capacityEnemies * 0.7)
         {
-            UpdateGameState(GameState.Warning);
+            Instance.UpdateGameState(GameState.Warning);
         }
         if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7)
         {
-            UpdateGameState(GameState.Alive);
+            Instance.UpdateGameState(GameState.Alive);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UpdateGameState(GameState.PauseMenu);
+            Instance.UpdateGameState(GameState.PauseMenu);
         }
         if(Instance.numberEnemies == Instance.capacityEnemies)
         {
-            UpdateGameState(GameState.GameOver);
+            Instance.UpdateGameState(GameState.GameOver);
         }
     }
 

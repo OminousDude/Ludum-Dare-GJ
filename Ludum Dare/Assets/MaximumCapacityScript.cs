@@ -4,30 +4,18 @@ using UnityEngine;
 
 public class MaximumCapacityScript : MonoBehaviour
 {
-    private float max;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
-        max = 0;
+        gameManager = GameManager.Instance;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (max >= 10)
+        if (gameManager.numberEnemies >= gameManager.capacityEnemies)
         {
-            Debug.Log("WARNING!! TOO MANY");
+            Debug.Log("I AM DEAD :(");
         }
-    }
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        max += 1;
-        //Debug.Log(max);
-    }
-    public void OnCollisionExit2D(Collision2D collision)
-    {
-        max -= 1;
-       //Debug.Log(max);
     }
 }

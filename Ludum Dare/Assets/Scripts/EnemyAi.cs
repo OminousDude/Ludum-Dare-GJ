@@ -25,6 +25,7 @@ public class EnemyAi : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("EnemyTarget").transform;
+        rb.freezeRotation = false;
     }
 
     // Update is called once per frame
