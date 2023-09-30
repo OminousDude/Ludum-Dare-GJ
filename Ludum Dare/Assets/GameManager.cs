@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pauseIsActive = false;
+        Instance.pauseIsActive = false;
         Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         Instance.numberDeadEnemies = 0;
         Instance.UpdateGameState(GameState.StartMenu);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
-        pauseObject.SetActive(false);
+        Instance.pauseObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -108,21 +108,22 @@ public class GameManager : MonoBehaviour
     }
     public void resumeIsPressed()
     {
-        pauseIsActive = !pauseIsActive;
-        pauseObject.SetActive(pauseIsActive);
+        Instance.pauseIsActive = !pauseIsActive;
+        Instance.pauseObject.SetActive(pauseIsActive);
+        Instance.UpdateGameState(GameState.Alive);
     }   
     public void restartIsPressed()
     {
-        pauseIsActive = false;
+        Instance.pauseIsActive = false;
         Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
         Instance.capacityEnemies = Instance.maxEnemies / 2;
         Instance.numberEnemies = 0;
         Instance.numberDeadEnemies = 0;
-        Instance.UpdateGameState(GameState.StartMenu);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
-        pauseObject.SetActive(false);
+        Instance.pauseObject.SetActive(false);
+        Instance.UpdateGameState(GameState.Alive);
     }   
     public void homeIsPressed()
     {
