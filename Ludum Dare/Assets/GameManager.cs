@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] Text floorLevel;
+    [SerializeField] TextMeshProUGUI floorLevel;
     public static GameManager Instance;
     public GameState currentState;
     public static event Action<GameState> onStateChange;
