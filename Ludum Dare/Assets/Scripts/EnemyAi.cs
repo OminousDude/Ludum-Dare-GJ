@@ -31,6 +31,7 @@ public class EnemyAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rb.transform.eulerAngles = new Vector3(0, 0, rb.transform.eulerAngles.z);
         if (isCorrecting) {
             rb.transform.eulerAngles = Vector2.Lerp(rb.transform.eulerAngles, new Vector2(0, 0), lerpTime * Time.deltaTime);
 
