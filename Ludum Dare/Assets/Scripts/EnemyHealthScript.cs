@@ -10,18 +10,15 @@ public class EnemyHealthScript : MonoBehaviour
     [SerializeField] float health, maxHealth = 3f;
     [SerializeField] float moveSpeed = 5f;
     Rigidbody2D rb;
-    Transform target;
-    Vector2 moveDirection;
     public GameObject hb;
-    public GameObject b;
     public bool isHit;
     public float time;
-  
+
     float speed = 0.01f;
     [SerializeField] FloatingHealthBar healthBar;
 
     private void Awake()
-    {  
+    {
         rb = GetComponent<Rigidbody2D>();
         healthBar = GetComponentInChildren<FloatingHealthBar>();
     }
@@ -32,18 +29,12 @@ public class EnemyHealthScript : MonoBehaviour
         hb.SetActive(false);
         health = maxHealth;
         healthBar.UpdateHealthBar(health, maxHealth);
-        target = GameObject.Find("Player").transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-
-        gameObject.transform.position = new Vector2(transform.position.x + (h * speed), transform.position.y + (v * speed));
-        
-            if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             time = 0;
             time += Time.deltaTime;
@@ -51,7 +42,7 @@ public class EnemyHealthScript : MonoBehaviour
             hb.SetActive(true);
             TakeDamage(0.1f);
             isHit = true;
-            
+
         }
         else if (isHit)
         {
@@ -64,9 +55,9 @@ public class EnemyHealthScript : MonoBehaviour
             time = 0;
             isHit = false;
         }
-       
+
     }
-        public void hideHealth()
+    public void hideHealth()
     {
         hb.SetActive(false);
     }
