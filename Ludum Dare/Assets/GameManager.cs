@@ -23,7 +23,11 @@ public class GameManager : MonoBehaviour
     private bool pauseIsActive;
     public Animator animator;
     private bool isActive;
-    public Animator animator2; 
+    public Animator animator2;
+    private float time = 0;
+    private int count = 0;
+    private float timer = 0f;
+    private float waitTime = 10f;
 
     void Awake(){
         if (Instance == null) // If there is no instance already
@@ -55,6 +59,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        timer += Time.fixedDeltaTime;
+        Debug.Log($"{timer}");
+        if (timer <= waitTime)
+        {
+            count++;
+            timer -= waitTime + Time.fixedDeltaTime;
+            Debug.Log($"{waitTime} lapsed and count is {count}");
+        }
+
         bool stateInstr = currentState == GameState.InstructionsMenu;
         bool statePause = currentState == GameState.PauseMenu;
 
@@ -124,7 +138,19 @@ public class GameManager : MonoBehaviour
                 Instance.maxEnemies = 6 * Instance.currentLevel;
                 Instance.numberEnemies = 0;
                 Instance.numberDeadEnemies = 0;
-                Instance.UpdateGameState(GameState.Alive);
+                animator2.SetBool("sleeping", false);
+                animator2.SetBool("openDoors", false);
+
+                time += Time.deltaTime;
+                while(time < 5)
+                {
+                    time += Time.deltaTime;
+                }
+                
+                if(time >= 4.5) {
+                    animator2.SetBool("openDoors", true);
+                    Instance.UpdateGameState(GameState.Alive);
+                    }
                 break; 
             case GameState.Warning:
                 break; 
