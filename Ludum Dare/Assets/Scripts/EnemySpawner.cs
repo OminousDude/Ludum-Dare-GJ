@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
             gameManager = GameManager.Instance;
             if (gameManager.numberEnemies == 0)
             {
-                StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
+                StartCoroutine(spawnEnemy(enemyInterval, enemyPrefabs));
             }
         }
     }
