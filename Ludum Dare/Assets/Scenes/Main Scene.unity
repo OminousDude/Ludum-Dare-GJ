@@ -2218,6 +2218,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5494261686794602379, guid: e420f181aa5e2d4409accfb63fd20266, type: 3}
+      propertyPath: dashSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494261686794602379, guid: e420f181aa5e2d4409accfb63fd20266, type: 3}
+      propertyPath: jumpForce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494261686794602379, guid: e420f181aa5e2d4409accfb63fd20266, type: 3}
+      propertyPath: slideSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5494261686794602379, guid: e420f181aa5e2d4409accfb63fd20266, type: 3}
       propertyPath: dashParticle
       value: 
       objectReference: {fileID: 2786076420750899718, guid: 91af07715e2cb6a41b8b29f3b0db2d06, type: 3}
@@ -2225,6 +2237,10 @@ PrefabInstance:
       propertyPath: jumpParticle
       value: 
       objectReference: {fileID: 2786076420750899718, guid: 91af07715e2cb6a41b8b29f3b0db2d06, type: 3}
+    - target: {fileID: 5494261686794602379, guid: e420f181aa5e2d4409accfb63fd20266, type: 3}
+      propertyPath: wallJumpLerp
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5494261686794602379, guid: e420f181aa5e2d4409accfb63fd20266, type: 3}
       propertyPath: slideParticle
       value: 

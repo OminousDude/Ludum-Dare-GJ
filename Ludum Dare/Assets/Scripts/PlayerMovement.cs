@@ -31,13 +31,6 @@ public class PlayerMovement : MonoBehaviour
 
     public int side = 1;
 
-    [Space]
-    [Header("Polish")]
-    public ParticleSystem dashParticle;
-    public ParticleSystem jumpParticle;
-    public ParticleSystem wallJumpParticle;
-    public ParticleSystem slideParticle;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -87,8 +80,6 @@ public class PlayerMovement : MonoBehaviour
     {
         hasDashed = false;
         isDashing = false;
-
-        jumpParticle.Play();
     }
 
     private void Walk(Vector2 dir)
@@ -105,13 +96,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump(Vector2 dir, bool wall)
     {
-        slideParticle.transform.parent.localScale = new Vector3(ParticleSide(), 1, 1);
-        ParticleSystem particle = wall ? wallJumpParticle : jumpParticle;
-
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.velocity += dir * jumpForce;
-
-        particle.Play();
     }
 
     int ParticleSide()
