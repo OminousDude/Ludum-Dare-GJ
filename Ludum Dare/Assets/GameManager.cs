@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     private bool levelChanged;
     public GameObject pauseObject;
     private bool pauseIsActive;
+    public Animator animator;
+    private bool isActive;
 
     void Awake(){
         if (Instance == null) // If there is no instance already
@@ -32,7 +34,6 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // Destroy the GameObject, this component is attached to
         }
-        Instance.UpdateGameState(GameState.StartMenu);
     }
 
     // Start is called before the first frame update
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
         Instance.capacityEnemies = Instance.maxEnemies/2;
         Instance.numberEnemies = 0;
         Instance.numberDeadEnemies = 0;
-        Instance.UpdateGameState(GameState.StartMenu);
+        Instance.UpdateGameState(GameState.InstructionsMenu);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
         Instance.pauseObject.SetActive(false);
     }
@@ -53,6 +54,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(currentState);
+        bool stateInstr = currentState == GameState.InstructionsMenu;
+
         if (Instance.numberDeadEnemies == Instance.maxEnemies && !Instance.levelChanged)
         {
             Instance.levelChanged = true;
@@ -66,17 +70,27 @@ public class GameManager : MonoBehaviour
         {
             Instance.UpdateGameState(GameState.Alive);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
         {
             Instance.UpdateGameState(GameState.PauseMenu);
+            isActive = false;
         }
         if(Instance.numberEnemies == Instance.capacityEnemies)
         {
             Instance.UpdateGameState(GameState.GameOver);
         }
-        if (Input.GetKeyDown(KeyCode.P) && currentState == GameState.InstructionsMenu)
+        if (Input.GetKeyDown(KeyCode.P) && stateInstr)
+        {
+            stateInstr = false;
+            Instance.UpdateGameState(GameState.Alive);
+        }
+        if (isActive)
         {
             Instance.UpdateGameState(GameState.Alive);
+        }
+           if(currentState != GameState.Alive)
+        {
+            isActive = false;
         }
     }
 
@@ -84,15 +98,21 @@ public class GameManager : MonoBehaviour
     {
         Instance.currentState = newState;
         onStateChange?.Invoke(newState);
-
+        //Debug.Log(currentState);
         switch (newState)
         {
             case GameState.StartMenu:
-                SceneManager.LoadScene("MainMenu");
-                break; 
+                /*SceneManager.LoadScene("MainMenu")*/
+                ;
+                break;
             case GameState.PauseMenu:
                 pauseIsActive = !pauseIsActive;
                 pauseObject.SetActive(pauseIsActive);
+                if (!pauseIsActive)
+                {
+                    isActive = true;
+                    currentState = GameState.Alive;
+                }
                 break;
             case GameState.LevelTransition:
                 Instance.currentLevel++;
@@ -110,6 +130,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.InstructionsMenu:
                 instrMenu.SetActive(true);
+                animator.SetBool("Walk",true);
                 break;
             case GameState.GameOver:
                 break;
@@ -117,6 +138,7 @@ public class GameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
 
         }
+       
     }
     public void resumeIsPressed()
     {

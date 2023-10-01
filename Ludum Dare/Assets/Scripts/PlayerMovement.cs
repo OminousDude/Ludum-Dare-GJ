@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private bool instIsHidden;
+    private bool pauseIsHidden;
+
     private Collision coll;
     [HideInInspector]
     public Rigidbody2D rb;
@@ -33,6 +36,17 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator anim;
 
+    private void Awake()
+    {
+        GameManager.onStateChange += OnGameStateChange;
+    }
+
+    private void OnGameStateChange(GameManager.GameState obj)
+    {
+        instIsHidden = obj != GameManager.GameState.InstructionsMenu;
+        pauseIsHidden = obj != GameManager.GameState.PauseMenu;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,43 +57,46 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        float xRaw = Input.GetAxisRaw("Horizontal");
-        float yRaw = Input.GetAxisRaw("Vertical");
-        Vector2 dir = new Vector2(x, y);
-
-        anim.SetBool("Walk", dir.x + dir.y == 0);
-
-        Walk(dir);
-
-        if (Input.GetButtonDown("Jump"))
+        if (instIsHidden || pauseIsHidden)
         {
-            if (coll.onGround)
-                Jump(Vector2.up, false);
-        }
+            float x = Input.GetAxis("Horizontal");
+            float y = Input.GetAxis("Vertical");
+            float xRaw = Input.GetAxisRaw("Horizontal");
+            float yRaw = Input.GetAxisRaw("Vertical");
+            Vector2 dir = new Vector2(x, y);
 
-        if (coll.onGround && !groundTouch)
-        {
-            GroundTouch();
-            groundTouch = true;
-        }
+            anim.SetBool("Walk", dir.x + dir.y == 0);
 
-        if (!coll.onGround && groundTouch)
-        {
-            groundTouch = false;
-        }
+            Walk(dir);
 
-        if (x > 0)
-        {
-            side = 1;
-            GetComponent<SpriteRenderer>().flipX = true;
-        }
-        if (x < 0)
-        {
-            side = -1;
+            if (Input.GetButtonDown("Jump"))
+            {
+                if (coll.onGround)
+                    Jump(Vector2.up, false);
+            }
 
-            GetComponent<SpriteRenderer>().flipX = false;
+            if (coll.onGround && !groundTouch)
+            {
+                GroundTouch();
+                groundTouch = true;
+            }
+
+            if (!coll.onGround && groundTouch)
+            {
+                groundTouch = false;
+            }
+
+            if (x > 0)
+            {
+                side = 1;
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
+            if (x < 0)
+            {
+                side = -1;
+
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
         }
     }
 
