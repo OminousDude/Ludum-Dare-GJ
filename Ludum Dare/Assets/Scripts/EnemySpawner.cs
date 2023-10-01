@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     private Transform[] spawnPoints;
 
     [SerializeField]
-    private GameObject enemyPrefab;
+    private GameObject[] enemyPrefabs;
 
     [SerializeField]
     private float enemyInterval = 1.5f;
@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
         gameManager = GameManager.Instance;
     }
 
-    private IEnumerator spawnEnemy(float interval, GameObject enemy)
+    private IEnumerator spawnEnemy(float interval, GameObject[] enemy)
     {
         if (gameManager.numberEnemies > 0)
         {
@@ -54,7 +54,7 @@ public class EnemySpawner : MonoBehaviour
 
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
 
-        GameObject newEnemy = Instantiate(enemy, spawnPoints[randSpawnPoint].position, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemy[Random.Range(0, enemyPrefabs.Length)], spawnPoints[randSpawnPoint].position, Quaternion.identity);
 
         if (gameManager.numberEnemies < gameManager.maxEnemies)
         {
