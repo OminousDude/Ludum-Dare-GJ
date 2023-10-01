@@ -6,6 +6,7 @@ public class EnemyAi : MonoBehaviour
 {
 
     [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float jumpForce = 5f;
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
@@ -71,6 +72,11 @@ public class EnemyAi : MonoBehaviour
         {
             grounded = true;
             isCorrecting = true;
+        }
+        if (collision.gameObject.layer == 8) {
+            grounded = false;
+            isCorrecting = false;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
