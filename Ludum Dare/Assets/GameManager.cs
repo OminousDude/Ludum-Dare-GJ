@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI floorLevel;
     public static GameManager Instance;
+    public GameObject instrMenu;
     public GameState currentState;
     public static event Action<GameState> onStateChange;
     public int currentLevel;
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject); // Destroy the GameObject, this component is attached to
         }
+        Instance.UpdateGameState(GameState.StartMenu);
     }
 
     // Start is called before the first frame update
@@ -42,7 +45,7 @@ public class GameManager : MonoBehaviour
         Instance.capacityEnemies = Instance.maxEnemies/2;
         Instance.numberEnemies = 0;
         Instance.numberDeadEnemies = 0;
-        Instance.UpdateGameState(GameState.Alive);
+        Instance.UpdateGameState(GameState.StartMenu);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
         Instance.pauseObject.SetActive(false);
     }
@@ -71,6 +74,10 @@ public class GameManager : MonoBehaviour
         {
             Instance.UpdateGameState(GameState.GameOver);
         }
+        if (Input.GetKeyDown(KeyCode.P) && currentState == GameState.InstructionsMenu)
+        {
+            Instance.UpdateGameState(GameState.Alive);
+        }
     }
 
     public void UpdateGameState(GameState newState)
@@ -81,7 +88,7 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.StartMenu:
-
+                SceneManager.LoadScene("MainMenu");
                 break; 
             case GameState.PauseMenu:
                 pauseIsActive = !pauseIsActive;
@@ -98,8 +105,12 @@ public class GameManager : MonoBehaviour
             case GameState.Warning:
                 break; 
             case GameState.Alive:
+                instrMenu.SetActive(false);
                 Instance.levelChanged = false;
-                break; 
+                break;
+            case GameState.InstructionsMenu:
+                instrMenu.SetActive(true);
+                break;
             case GameState.GameOver:
                 break;
             default:
@@ -128,7 +139,7 @@ public class GameManager : MonoBehaviour
     }   
     public void homeIsPressed()
     {
-       //Go back to main menu screen
+        Instance.UpdateGameState(GameState.StartMenu);
     }
 
     public enum GameState

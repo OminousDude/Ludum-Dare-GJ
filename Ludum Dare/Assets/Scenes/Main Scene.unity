@@ -176,6 +176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
+      propertyPath: instrMenu
+      value: 
+      objectReference: {fileID: 1964701251}
+    - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
       propertyPath: floorLevel
       value: 
       objectReference: {fileID: 4988792381916200237}
@@ -2241,6 +2245,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1964701251 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1482453500812201420, guid: 852153dccaf8265498eab685243911ed, type: 3}
+  m_PrefabInstance: {fileID: 1218370513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1985363254
 PrefabInstance:
   m_ObjectHideFlags: 0
