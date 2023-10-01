@@ -1349,6 +1349,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Instructions Menu
       objectReference: {fileID: 0}
+    - target: {fileID: 1482453500812201420, guid: 852153dccaf8265498eab685243911ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5988862190799709344, guid: 852153dccaf8265498eab685243911ed, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.763
@@ -2705,13 +2709,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8980894211967830034}
-  m_LocalRotation: {x: 0.020645816, y: -0.5617041, z: -0.030379394, w: 0.82652247}
+  m_LocalRotation: {x: 0.02255746, y: -0.56163055, z: -0.03319229, w: 0.8264142}
   m_LocalPosition: {x: 0, y: 0, z: 0.4}
   m_LocalScale: {x: 0.05043664, y: 0.05043664, z: 0.05043664}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1038811379}
-  m_LocalEulerAnglesHint: {x: 0, y: -68.4, z: -4.21}
+  m_LocalEulerAnglesHint: {x: 0, y: -68.4, z: -4.6}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.75, y: 0.25}
