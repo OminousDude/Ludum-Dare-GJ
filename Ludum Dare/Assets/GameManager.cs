@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     private bool pauseIsActive;
     public Animator animator;
     private bool isActive;
+    public Animator animator2; 
 
     void Awake(){
         if (Instance == null) // If there is no instance already
@@ -54,44 +55,42 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(currentState);
         bool stateInstr = currentState == GameState.InstructionsMenu;
+        bool statePause = currentState == GameState.PauseMenu;
 
-        if (Instance.numberDeadEnemies == Instance.maxEnemies && !Instance.levelChanged)
+        if (Instance.numberDeadEnemies == Instance.maxEnemies && !Instance.levelChanged && !statePause)
         {
             Instance.levelChanged = true;
             Instance.UpdateGameState(GameState.LevelTransition);
         }
-        if(Instance.numberEnemies >= Instance.capacityEnemies * 0.7)
+        if (Instance.numberEnemies >= Instance.capacityEnemies * 0.7 && !statePause && currentState != GameState.Warning)
         {
             Instance.UpdateGameState(GameState.Warning);
         }
-        if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7)
+        if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7 && !statePause)
         {
             Instance.UpdateGameState(GameState.Alive);
         }
+        //if (Instance.numberEnemies == Instance.capacityEnemies && !statePause)
+        //{
+        //    Instance.UpdateGameState(GameState.GameOver);
+        //}
         if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
         {
             Instance.UpdateGameState(GameState.PauseMenu);
             isActive = false;
         }
-        if(Instance.numberEnemies == Instance.capacityEnemies)
-        {
-            Instance.UpdateGameState(GameState.GameOver);
-        }
         if (Input.GetKeyDown(KeyCode.P) && stateInstr)
         {
             stateInstr = false;
             Instance.UpdateGameState(GameState.Alive);
+            animator2.SetBool("sleeping", false);
         }
         if (isActive)
         {
             Instance.UpdateGameState(GameState.Alive);
         }
-           if(currentState != GameState.Alive)
-        {
-            isActive = false;
-        }
+       
     }
 
     public void UpdateGameState(GameState newState)
@@ -102,17 +101,22 @@ public class GameManager : MonoBehaviour
         switch (newState)
         {
             case GameState.StartMenu:
-                /*SceneManager.LoadScene("MainMenu")*/
+                SceneManager.LoadScene("MainMenu")
                 ;
                 break;
             case GameState.PauseMenu:
                 pauseIsActive = !pauseIsActive;
                 pauseObject.SetActive(pauseIsActive);
+
+                Time.timeScale = pauseIsActive?0:1;
                 if (!pauseIsActive)
                 {
                     isActive = true;
                     currentState = GameState.Alive;
+                    onStateChange?.Invoke(currentState);
                 }
+                else
+                    isActive = false;
                 break;
             case GameState.LevelTransition:
                 Instance.currentLevel++;
@@ -140,6 +144,7 @@ public class GameManager : MonoBehaviour
         }
        
     }
+
     public void resumeIsPressed()
     {
         Instance.pauseIsActive = !pauseIsActive;

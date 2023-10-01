@@ -11,6 +11,7 @@ public class EnemyAi : MonoBehaviour
     Transform target;
     Vector2 moveDirection;
     public bool grounded = false;
+    GameManager gameManager;
 
     float t = 0f;
     [SerializeField][Range(0f, 4f)] float lerpTime = 4f;
@@ -27,6 +28,7 @@ public class EnemyAi : MonoBehaviour
     {
         target = GameObject.Find("EnemyTarget").transform;
         rb.freezeRotation = false;
+        gameManager = GameManager.Instance;
     }
 
     // Update is called once per frame
@@ -46,7 +48,6 @@ public class EnemyAi : MonoBehaviour
                 rb.freezeRotation = true;
             }
         }
-
         if (target && grounded && !isCorrecting)
         {
             Vector2 direction = (target.position - transform.position).normalized;

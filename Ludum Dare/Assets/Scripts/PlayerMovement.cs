@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private bool instIsHidden;
-    private bool pauseIsHidden;
+    private bool isAlive;
 
     private Collision coll;
     [HideInInspector]
@@ -43,10 +42,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnGameStateChange(GameManager.GameState obj)
     {
-        instIsHidden = obj != GameManager.GameState.InstructionsMenu;
-        pauseIsHidden = obj != GameManager.GameState.PauseMenu;
+        isAlive = obj == GameManager.GameState.Alive || obj == GameManager.GameState.Warning;
+        Debug.Log(isAlive +" " + obj.ToString());
     }
-
+    public void OnDestroy()
+    {
+        GameManager.onStateChange -= OnGameStateChange;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (instIsHidden || pauseIsHidden)
+        if (isAlive)
         {
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
@@ -129,4 +131,6 @@ public class PlayerMovement : MonoBehaviour
         int particleSide = coll.onRightWall ? 1 : -1;
         return particleSide;
     }
+
+    
 }

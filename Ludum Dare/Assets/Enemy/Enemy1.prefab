@@ -108,7 +108,7 @@ Rigidbody2D:
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: cf12c714fc07fd64ab02e1d85580d35e, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -380,9 +380,29 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 80.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 19.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 8.6436e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 86.7
+      objectReference: {fileID: 0}
     - target: {fileID: 5655234825744967697, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6084138056457315388, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7019608
       objectReference: {fileID: 0}
     - target: {fileID: 6163730126448008917, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_AnchorMax.x

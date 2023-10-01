@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     private float enemyInterval = 1.5f;
 
     private GameManager gameManager;
+    private int spawnedEnemies;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
             gameManager = GameManager.Instance;
             if (gameManager.numberEnemies == 0)
             {
+                spawnedEnemies = 0;
                 StartCoroutine(spawnEnemy(enemyInterval, enemyPrefabs));
             }
         }
@@ -46,17 +48,16 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator spawnEnemy(float interval, GameObject[] enemy)
     {
-        if (gameManager.numberEnemies > 0)
+        if (spawnedEnemies > 0)
         {
             yield return new WaitForSeconds(interval);
         }
-        gameManager.numberEnemies++;
-
+        spawnedEnemies++;
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
 
         GameObject newEnemy = Instantiate(enemy[Random.Range(0, enemyPrefabs.Length)], spawnPoints[randSpawnPoint].position, Quaternion.identity);
 
-        if (gameManager.numberEnemies < gameManager.maxEnemies)
+        if (spawnedEnemies < gameManager.maxEnemies)
         {
             StartCoroutine(spawnEnemy(interval, enemy));
         }
