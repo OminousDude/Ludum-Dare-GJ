@@ -4,23 +4,119 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Vector2 speed = new Vector2(50, 50);
+    private Collision coll;
+    [HideInInspector]
+    public Rigidbody2D rb;
+
+    [Space]
+    [Header("Stats")]
+    public float speed = 10;
+    public float jumpForce = 50;
+    public float slideSpeed = 5;
+    public float wallJumpLerp = 10;
+    public float dashSpeed = 20;
+
+    [Space]
+    [Header("Booleans")]
+    public bool canMove;
+    public bool wallGrab;
+    public bool wallJumped;
+    public bool wallSlide;
+    public bool isDashing;
+
+    [Space]
+
+    private bool groundTouch;
+    private bool hasDashed;
+
+    public int side = 1;
+
+    [Space]
+    [Header("Polish")]
+    public ParticleSystem dashParticle;
+    public ParticleSystem jumpParticle;
+    public ParticleSystem wallJumpParticle;
+    public ParticleSystem slideParticle;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        coll = GetComponent<Collision>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float inputX = Input.GetAxis("Horizontal");
-        float inputY = Input.GetAxis("Vertical");
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+        float xRaw = Input.GetAxisRaw("Horizontal");
+        float yRaw = Input.GetAxisRaw("Vertical");
+        Vector2 dir = new Vector2(x, y);
 
-        Vector3 mvmt = new Vector3(speed.x * inputX, speed.y * inputY, 0);
+        Walk(dir);
 
-        mvmt *= Time.deltaTime;
-        transform.Translate(mvmt);
+        if (Input.GetButtonDown("Jump"))
+        {
+            if (coll.onGround)
+                Jump(Vector2.up, false);
+        }
+
+        if (coll.onGround && !groundTouch)
+        {
+            GroundTouch();
+            groundTouch = true;
+        }
+
+        if (!coll.onGround && groundTouch)
+        {
+            groundTouch = false;
+        }
+
+        if (x > 0)
+        {
+            side = 1;
+        }
+        if (x < 0)
+        {
+            side = -1;
+        }
+    }
+
+    void GroundTouch()
+    {
+        hasDashed = false;
+        isDashing = false;
+
+        jumpParticle.Play();
+    }
+
+    private void Walk(Vector2 dir)
+    {
+        if (!wallJumped)
+        {
+            rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = Vector2.Lerp(rb.velocity, (new Vector2(dir.x * speed, rb.velocity.y)), wallJumpLerp * Time.deltaTime);
+        }
+    }
+
+    private void Jump(Vector2 dir, bool wall)
+    {
+        slideParticle.transform.parent.localScale = new Vector3(ParticleSide(), 1, 1);
+        ParticleSystem particle = wall ? wallJumpParticle : jumpParticle;
+
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.velocity += dir * jumpForce;
+
+        particle.Play();
+    }
+
+    int ParticleSide()
+    {
+        int particleSide = coll.onRightWall ? 1 : -1;
+        return particleSide;
     }
 }
