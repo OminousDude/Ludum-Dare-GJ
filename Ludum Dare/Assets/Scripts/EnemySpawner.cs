@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -16,29 +17,46 @@ public class EnemySpawner : MonoBehaviour
 
     private GameManager gameManager;
 
-    private int enemyCount = 0;
+    private void Awake()
+    {
+        GameManager.onStateChange += OnGameStateChange;
+    }
+
+    private void OnGameStateChange(GameManager.GameState obj) {
+        if (obj == GameManager.GameState.Alive)
+        {
+            gameManager = GameManager.Instance;
+            if (gameManager.numberEnemies == 0)
+            {
+                StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.onStateChange -= OnGameStateChange;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameManager.Instance;
-        StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
     }
 
     private IEnumerator spawnEnemy(float interval, GameObject enemy)
     {
-        gameManager.numberEnemies++;
-        enemyCount++;
-        if (enemyCount > 0)
+        if (gameManager.numberEnemies > 0)
         {
             yield return new WaitForSeconds(interval);
         }
+        gameManager.numberEnemies++;
 
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
 
         GameObject newEnemy = Instantiate(enemy, spawnPoints[randSpawnPoint].position, Quaternion.identity);
 
-        if (enemyCount < gameManager.maxEnemies)
+        if (gameManager.numberEnemies < gameManager.maxEnemies)
         {
             StartCoroutine(spawnEnemy(interval, enemy));
         }
