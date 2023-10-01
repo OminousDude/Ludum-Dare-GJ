@@ -406,7 +406,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 7
   m_Sprite: {fileID: -1998377260, guid: 38b7a00bff60e7b45a24780a14903e3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1114,7 +1114,7 @@ Transform:
   m_GameObject: {fileID: 948717117}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.03, y: -0.7, z: -10}
+  m_LocalPosition: {x: 1.03, y: -0.825, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1320,7 +1320,7 @@ GameObject:
   - component: {fileID: 1097372861}
   - component: {fileID: 1097372862}
   - component: {fileID: 1097372863}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Elevator_ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1977,6 +1977,7 @@ GameObject:
   - component: {fileID: 1447504541}
   - component: {fileID: 1447504540}
   - component: {fileID: 1447504539}
+  - component: {fileID: 1447504543}
   m_Layer: 5
   m_Name: Warning Canvas
   m_TagString: Untagged
@@ -2070,6 +2071,20 @@ RectTransform:
   m_AnchoredPosition: {x: -0.69000006, y: -0.491}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1447504543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1447504538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 563b05febf31e974781d8677399ff332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  warningSign: {fileID: 459854609}
+  redAlert: {fileID: 816315486}
 --- !u!1 &1549788489
 GameObject:
   m_ObjectHideFlags: 0
@@ -2522,7 +2537,7 @@ GameObject:
   - component: {fileID: 2016340286}
   - component: {fileID: 2016340287}
   - component: {fileID: 2016340288}
-  m_Layer: 9
+  m_Layer: 6
   m_Name: Elevator_wall_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
