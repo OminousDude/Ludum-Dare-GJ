@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Search;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -9,32 +10,53 @@ public class EnemySpawner : MonoBehaviour
     private Transform[] spawnPoints;
 
     [SerializeField]
-    private GameObject enemyPrefab;
+    private GameObject[] enemyPrefabs;
 
     [SerializeField]
     private float enemyInterval = 1.5f;
 
     private GameManager gameManager;
 
-    private int enemyCount = 0;
+    private void Awake()
+    {
+        GameManager.onStateChange += OnGameStateChange;
+    }
+
+    private void OnGameStateChange(GameManager.GameState obj) {
+        if (obj == GameManager.GameState.Alive)
+        {
+            gameManager = GameManager.Instance;
+            if (gameManager.numberEnemies == 0)
+            {
+                StartCoroutine(spawnEnemy(enemyInterval, enemyPrefabs));
+            }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.onStateChange -= OnGameStateChange;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         gameManager = GameManager.Instance;
-        StartCoroutine(spawnEnemy(enemyInterval, enemyPrefab));
     }
 
-    private IEnumerator spawnEnemy(float interval, GameObject enemy)
+    private IEnumerator spawnEnemy(float interval, GameObject[] enemy)
     {
-        enemyCount++;
-        yield return new WaitForSeconds(interval);
+        if (gameManager.numberEnemies > 0)
+        {
+            yield return new WaitForSeconds(interval);
+        }
+        gameManager.numberEnemies++;
 
         int randSpawnPoint = Random.Range(0, spawnPoints.Length);
 
-        GameObject newEnemy = Instantiate(enemy, spawnPoints[randSpawnPoint].position, Quaternion.identity);
+        GameObject newEnemy = Instantiate(enemy[Random.Range(0, enemyPrefabs.Length)], spawnPoints[randSpawnPoint].position, Quaternion.identity);
 
-        if (enemyCount < gameManager.maxEnemies)
+        if (gameManager.numberEnemies < gameManager.maxEnemies)
         {
             StartCoroutine(spawnEnemy(interval, enemy));
         }

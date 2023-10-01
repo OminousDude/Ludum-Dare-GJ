@@ -16,8 +16,9 @@ GameObject:
   - component: {fileID: 5397364468901140684}
   - component: {fileID: 4221200599522584488}
   - component: {fileID: 4481118998768921234}
-  m_Layer: 7
-  m_Name: Enemy
+  - component: {fileID: 6168813774874649148}
+  m_Layer: 3
+  m_Name: Enemy2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2167805684018123719}
@@ -79,9 +80,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: -6722849418530687003, guid: a8de3b410830f00498523daa92f5ba78, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_SortingOrder: 8
+  m_Sprite: {fileID: 963757256, guid: 88ce450e0c64d0a489ba9ee4075738c2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -150,8 +151,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.32}
-  m_Size: {x: 0.32, y: 0.64}
+  m_Offset: {x: 0.02047081, y: 0.0100461645}
+  m_Size: {x: 0.27905878, y: 1.0552006}
   m_Direction: 0
 --- !u!114 &3083842838372211598
 MonoBehaviour:
@@ -180,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  jumpForce: 5
   grounded: 0
   lerpTime: 4
 --- !u!114 &4221200599522584488
@@ -201,8 +203,9 @@ MonoBehaviour:
   time: 0
   canBeHit: 0
   healthBar: {fileID: 7489980776437995004}
-  bounce: 50
+  bounce: 10
   enemyAi: {fileID: 5397364468901140684}
+  particle: {fileID: 2786076420750899718, guid: 91af07715e2cb6a41b8b29f3b0db2d06, type: 3}
 --- !u!61 &4481118998768921234
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -235,19 +238,40 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.001180619, y: 0.32}
+  m_Offset: {x: 0.001180619, y: 0.068584055}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 0.32, y: 0.64}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.3125, y: 0.96875}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6449482, y: 0.64}
+  m_Size: {x: 0.6449482, y: 1.1428318}
   m_EdgeRadius: 0
+--- !u!95 &6168813774874649148
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5174689007642537048}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8449ebee808717a4babde9d63360ea70, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &944155039889529200
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,15 +318,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1373536077951503031, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.005
+      value: 0.007653403
       objectReference: {fileID: 0}
     - target: {fileID: 1373536077951503031, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.005
+      value: 0.007653403
       objectReference: {fileID: 0}
     - target: {fileID: 1373536077951503031, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.005
+      value: 0.007653403
       objectReference: {fileID: 0}
     - target: {fileID: 1373536077951503031, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -338,7 +362,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1373536077951503031, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.4
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1373536077951503031, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

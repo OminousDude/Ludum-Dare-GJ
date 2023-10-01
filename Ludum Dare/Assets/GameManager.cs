@@ -11,10 +11,10 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState currentState;
     public static event Action<GameState> onStateChange;
-    private int currentLevel;
+    public int currentLevel;
     public int numberEnemies;
     public int maxEnemies;
-    private int numberDeadEnemies;
+    public int numberDeadEnemies;
     public int capacityEnemies;
     private bool levelChanged;
     public GameObject pauseObject;
@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         Instance.capacityEnemies = Instance.maxEnemies/2;
         Instance.numberEnemies = 0;
         Instance.numberDeadEnemies = 0;
-        Instance.UpdateGameState(GameState.StartMenu);
+        Instance.UpdateGameState(GameState.Alive);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
         Instance.pauseObject.SetActive(false);
     }
@@ -52,30 +52,31 @@ public class GameManager : MonoBehaviour
     {
         if (Instance.numberDeadEnemies == Instance.maxEnemies && !Instance.levelChanged)
         {
-            levelChanged = true;
-            UpdateGameState(GameState.LevelTransition);
+            Instance.levelChanged = true;
+            Instance.UpdateGameState(GameState.LevelTransition);
         }
         if(Instance.numberEnemies >= Instance.capacityEnemies * 0.7)
         {
-            UpdateGameState(GameState.Warning);
+            Instance.UpdateGameState(GameState.Warning);
         }
         if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7)
         {
-            UpdateGameState(GameState.Alive);
+            Instance.UpdateGameState(GameState.Alive);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            UpdateGameState(GameState.PauseMenu);
+            Instance.UpdateGameState(GameState.PauseMenu);
         }
         if(Instance.numberEnemies == Instance.capacityEnemies)
         {
-            UpdateGameState(GameState.GameOver);
+            Instance.UpdateGameState(GameState.GameOver);
         }
     }
 
     public void UpdateGameState(GameState newState)
     {
         Instance.currentState = newState;
+        onStateChange?.Invoke(newState);
 
         switch (newState)
         {
@@ -90,7 +91,8 @@ public class GameManager : MonoBehaviour
                 Instance.currentLevel++;
                 Instance.floorLevel.text = Instance.currentLevel.ToString();
                 Instance.maxEnemies = 6 * Instance.currentLevel;
-                Instance.numberEnemies = Instance.maxEnemies;
+                Instance.numberEnemies = 0;
+                Instance.numberDeadEnemies = 0;
                 Instance.UpdateGameState(GameState.Alive);
                 break; 
             case GameState.Warning:
@@ -104,8 +106,6 @@ public class GameManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
 
         }
-
-        onStateChange?.Invoke(newState);
     }
     public void resumeIsPressed()
     {
@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
     public enum GameState
     {
         StartMenu,
+        InstructionsMenu,
         PauseMenu,
         LevelTransition,
         Warning,

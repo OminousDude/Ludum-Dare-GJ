@@ -6,6 +6,7 @@ public class EnemyAi : MonoBehaviour
 {
 
     [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float jumpForce = 5f;
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
@@ -25,11 +26,14 @@ public class EnemyAi : MonoBehaviour
     void Start()
     {
         target = GameObject.Find("EnemyTarget").transform;
+        rb.freezeRotation = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        rb.transform.eulerAngles = new Vector3(0, 0, rb.transform.eulerAngles.z);
+        transform.rotation.Set(transform.rotation.x, 0, transform.rotation.z, transform.rotation.w);
         if (isCorrecting) {
             rb.transform.eulerAngles = Vector2.Lerp(rb.transform.eulerAngles, new Vector2(0, 0), lerpTime * Time.deltaTime);
 
@@ -64,16 +68,21 @@ public class EnemyAi : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3 && !grounded)
+        if (collision.gameObject.layer == 9 && !grounded)
         {
             grounded = true;
             isCorrecting = true;
+        }
+        if (collision.gameObject.layer == 8) {
+            grounded = false;
+            isCorrecting = false;
+            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == 9)
         {
             grounded = false;
             rb.freezeRotation = false;
