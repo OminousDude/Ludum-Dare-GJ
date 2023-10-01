@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public GameState currentState;
     public static event Action<GameState> onStateChange;
-    private int currentLevel;
+    public int currentLevel;
     public int numberEnemies;
     public int maxEnemies;
     private int numberDeadEnemies;

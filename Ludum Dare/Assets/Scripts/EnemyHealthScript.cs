@@ -21,6 +21,7 @@ public class EnemyHealthScript : MonoBehaviour
     [SerializeField] float bounce = 50f;
     public EnemyAi enemyAi;
 
+    public ParticleSystem particle;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -95,7 +96,9 @@ public class EnemyHealthScript : MonoBehaviour
     }
     void Die()
     {
-        //GetComponent<LootBag>().InstantiateLoot(transform.position);
+        transform.position.Set(transform.position.x, transform.position.y + 1, transform.position.z);
+        Instantiate(particle, transform.position, transform.rotation);
+
         Destroy(gameObject);
         Destroy(rb);
     }

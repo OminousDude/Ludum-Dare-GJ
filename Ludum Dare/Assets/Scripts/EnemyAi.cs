@@ -30,6 +30,8 @@ public class EnemyAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        transform.rotation.Set(transform.rotation.x, 0, transform.rotation.z, transform.rotation.w);
+
         if (isCorrecting) {
             rb.transform.eulerAngles = Vector2.Lerp(rb.transform.eulerAngles, new Vector2(0, 0), lerpTime * Time.deltaTime);
 
@@ -64,7 +66,7 @@ public class EnemyAi : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3 && !grounded)
+        if (collision.gameObject.layer == 9 && !grounded)
         {
             grounded = true;
             isCorrecting = true;
@@ -73,7 +75,7 @@ public class EnemyAi : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 3)
+        if (collision.gameObject.layer == 9)
         {
             grounded = false;
             rb.freezeRotation = false;

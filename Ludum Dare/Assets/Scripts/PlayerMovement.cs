@@ -31,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     public int side = 1;
 
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +48,8 @@ public class PlayerMovement : MonoBehaviour
         float xRaw = Input.GetAxisRaw("Horizontal");
         float yRaw = Input.GetAxisRaw("Vertical");
         Vector2 dir = new Vector2(x, y);
+
+        anim.SetBool("Walk", dir.x + dir.y == 0);
 
         Walk(dir);
 
@@ -69,10 +73,13 @@ public class PlayerMovement : MonoBehaviour
         if (x > 0)
         {
             side = 1;
+            GetComponent<SpriteRenderer>().flipX = true;
         }
         if (x < 0)
         {
             side = -1;
+
+            GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 
