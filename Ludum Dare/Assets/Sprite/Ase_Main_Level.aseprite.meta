@@ -121,7 +121,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Ase_Main_Level_Frame_0
     originalName: 
-    pivot: {x: 0.5, y: -0.09677419}
+    pivot: {x: 0.5, y: -0.59999996}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -129,7 +129,7 @@ ScriptedImporter:
       x: 4
       y: 4
       width: 480
-      height: 248
+      height: 40
     spriteID: d45e4aa1ebecc6847983ae661d2802f1
     spriteBone: []
     spriteOutline: []
@@ -139,66 +139,6 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Ase_Main_Level_Frame_1
-    originalName: 
-    pivot: {x: 0.5, y: -0.09677419}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 260
-      width: 480
-      height: 248
-    spriteID: 8fad8a1ffb9a1144197480cfd123d61a
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 260}
-  - name: Ase_Main_Level_Frame_2
-    originalName: 
-    pivot: {x: 0.5, y: -0.09677419}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 516
-      width: 480
-      height: 248
-    spriteID: 1f213767961df43428713269f6add8cc
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 516}
-  - name: Ase_Main_Level_Frame_3
-    originalName: 
-    pivot: {x: 0.5, y: -0.09677419}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 772
-      width: 480
-      height: 248
-    spriteID: ca57b23bc42587b48a2bc21dcb6df1c2
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 772}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
@@ -208,38 +148,14 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Ase_Main_Level_Frame_0
+    - name: Ase_Main_Level
       frameIndex: 0
       cellRect:
         x: 0
         y: 24
         width: 480
-        height: 248
+        height: 40
       spriteId: d45e4aa1ebecc6847983ae661d2802f1
-    - name: Ase_Main_Level_Frame_1
-      frameIndex: 1
-      cellRect:
-        x: 0
-        y: 24
-        width: 480
-        height: 248
-      spriteId: 8fad8a1ffb9a1144197480cfd123d61a
-    - name: Ase_Main_Level_Frame_2
-      frameIndex: 2
-      cellRect:
-        x: 0
-        y: 24
-        width: 480
-        height: 248
-      spriteId: 1f213767961df43428713269f6add8cc
-    - name: Ase_Main_Level_Frame_3
-      frameIndex: 3
-      cellRect:
-        x: 0
-        y: 24
-        width: 480
-        height: 248
-      spriteId: ca57b23bc42587b48a2bc21dcb6df1c2
     linkedCells: []
     parentIndex: -1
   platformSettings: []
