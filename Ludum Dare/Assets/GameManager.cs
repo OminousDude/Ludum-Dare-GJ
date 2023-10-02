@@ -22,12 +22,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseObject;
     private bool pauseIsActive;
     public Animator animator;
-    private bool isActive;
     public Animator animator2;
-    private float time = 0;
-    private int count = 0;
-    private float timer = 0f;
-    private float waitTime = 10f;
+ 
 
     void Awake(){
         if (Instance == null) // If there is no instance already
@@ -82,7 +78,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
         {
             Instance.UpdateGameState(GameState.PauseMenu);
-            isActive = false;
         }
         if (Input.GetKeyDown(KeyCode.P) && stateInstr)
         {
@@ -110,7 +105,6 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = pauseIsActive?0:1;
                 if (!pauseIsActive)
                 {
-                    isActive = true;
                     Instance.UpdateGameState(GameState.Alive);
                 }
                 break;
@@ -126,15 +120,9 @@ public class GameManager : MonoBehaviour
             case GameState.Warning:
                 break; 
             case GameState.Alive:
-                //if (!Instance.isActive)
-                //{
                 animator2.SetBool("sleeping", false);
                 animator2.SetBool("openDoors", true);
-                
-                //animator2.SetBool("openDoors", false);
-                //}
                 instrMenu.SetActive(false);
-                isActive = false;
                 break;
             case GameState.InstructionsMenu:
                 instrMenu.SetActive(true);
