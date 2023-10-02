@@ -43,7 +43,6 @@ public class PlayerMovement : MonoBehaviour
     private void OnGameStateChange(GameManager.GameState obj)
     {
         isAlive = obj == GameManager.GameState.Alive || obj == GameManager.GameState.Warning;
-        Debug.Log(isAlive +" " + obj.ToString());
     }
     public void OnDestroy()
     {
