@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject pauseObject;
     private bool pauseIsActive;
     private bool isActive;
+    [SerializeField] AudioSource alarmSound;
 
     void Awake()
     {
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
         Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
-        Instance.capacityEnemies = Instance.maxEnemies/2;
+        Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
         Instance.numberEnemies = 0;
         Instance.numberDeadEnemies = 0;
         Instance.UpdateGameState(GameState.InstructionsMenu);
@@ -67,14 +68,19 @@ public class GameManager : MonoBehaviour
         }
         if (Instance.numberEnemies >= Instance.capacityEnemies * 0.7 && !statePause && Instance.currentState != GameState.Warning)
         {
+            alarmSound.loop = true;
+            alarmSound.Play();
             Instance.UpdateGameState(GameState.Warning);
         }
         if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7 && !statePause)
         {
+            alarmSound.loop = false;
             Instance.UpdateGameState(GameState.Alive);
         }
         if (Instance.numberEnemies == Instance.capacityEnemies && !statePause)
         {
+            alarmSound.loop = false;
+            alarmSound.Stop();
             Instance.UpdateGameState(GameState.GameOver);
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
@@ -122,6 +128,7 @@ public class GameManager : MonoBehaviour
                 Instance.currentLevel++;
                 Instance.floorLevel.text = Instance.currentLevel.ToString();
                 Instance.maxEnemies = 6 * Instance.currentLevel;
+                Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
                 Instance.numberEnemies = 0;
                 Instance.numberDeadEnemies = 0;
                 Instance.UpdateGameState(GameState.Alive);
@@ -164,7 +171,7 @@ public class GameManager : MonoBehaviour
         Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
-        Instance.capacityEnemies = Instance.maxEnemies / 2;
+        Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
         Instance.numberEnemies = 0;
         Instance.numberDeadEnemies = 0;
         Instance.floorLevel.text = Instance.currentLevel.ToString();

@@ -27,7 +27,6 @@ public class EnemySpawner : MonoBehaviour
     private void OnGameStateChange(GameManager.GameState obj) {
         if (obj == GameManager.GameState.Alive)
         {
-            Debug.Log("UWU");
             if (gameManager.numberEnemies == 0)
             {
                 spawnedEnemies = 0;
