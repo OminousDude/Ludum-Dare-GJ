@@ -234,9 +234,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1556283836}
     - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
+      propertyPath: gameOvrMenu
+      value: 
+      objectReference: {fileID: 2004009009}
+    - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
       propertyPath: pauseObject
       value: 
       objectReference: {fileID: 5532335192907676288}
+    - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
+      propertyPath: gameOvrScore
+      value: 
+      objectReference: {fileID: 2004009010}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1725,8 +1733,6 @@ GameObject:
   - component: {fileID: 1350594839}
   - component: {fileID: 1350594838}
   - component: {fileID: 1350594840}
-  - component: {fileID: 1350594842}
-  - component: {fileID: 1350594841}
   m_Layer: 9
   m_Name: Elevator_floor
   m_TagString: Untagged
@@ -1845,63 +1851,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 10.692294, y: 0.44873476}
-  m_EdgeRadius: 0
---- !u!114 &1350594841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1350594837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 754933087adbb344492b56a1e4f8683c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!61 &1350594842
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1350594837}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 8
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 887
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.08838129, y: -0.080346346}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4.8, y: 3.04}
-    newSize: {x: 4.8, y: 3.04}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.414338, y: 2.3811593}
   m_EdgeRadius: 0
 --- !u!1 &1414416959
 GameObject:
@@ -2853,6 +2802,79 @@ PrefabInstance:
       insertIndex: 4
       addedObject: {fileID: 391747620}
   m_SourcePrefab: {fileID: 100100000, guid: e420f181aa5e2d4409accfb63fd20266, type: 3}
+--- !u!1001 &2004009008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1482453500812201420, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_Name
+      value: GameOverMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.763
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.165
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.10524637
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+--- !u!1 &2004009009 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1482453500812201420, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+  m_PrefabInstance: {fileID: 2004009008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2004009010 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4019974299334882021, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+  m_PrefabInstance: {fileID: 2004009008}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2016340285
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,3 +4086,4 @@ SceneRoots:
   - {fileID: 1817688217}
   - {fileID: 571876978}
   - {fileID: 1218370513}
+  - {fileID: 2004009008}

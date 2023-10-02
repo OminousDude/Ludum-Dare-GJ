@@ -23,13 +23,8 @@ public class GameManager : MonoBehaviour
     public int capacityEnemies;
     public GameObject pauseObject;
     private bool pauseIsActive;
-    private bool isActive;
     [SerializeField] AudioSource alarmSound;
     public Animator animator2;
-    private float time = 0;
-    private int count = 0;
-    private float timer = 0f;
-    private float waitTime = 10f;
 
     void Awake()
     {
@@ -90,7 +85,6 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
         {
             Instance.UpdateGameState(GameState.PauseMenu);
-            Instance.isActive = false;
         }
         if (Input.GetKeyDown(KeyCode.P) && stateInstr)
         {
@@ -116,7 +110,6 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = pauseIsActive?0:1;
                 if (!pauseIsActive)
                 {
-                    Instance.isActive = true;
                     Instance.UpdateGameState(GameState.Alive);
                 }
                 break;
@@ -127,6 +120,7 @@ public class GameManager : MonoBehaviour
                 Instance.maxEnemies = 6 * Instance.currentLevel;
                 Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
                 Instance.numberEnemies = 0;
+                Instance.numberDeadEnemies = maxEnemies;
                 Invoke("Wait", 5);
                 break; 
             case GameState.Warning:
@@ -142,7 +136,6 @@ public class GameManager : MonoBehaviour
                 
                 //animator2.SetBool("openDoors", false);
                 //}
-                isActive = false;
                 break;
             case GameState.InstructionsMenu:
                 Time.timeScale = 0;
