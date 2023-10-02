@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI floorLevel;
+    [SerializeField] TextMeshProUGUI enemiesLeft;
     public static GameManager Instance;
     public GameObject instrMenu;
     public GameObject gameOvrMenu;
@@ -20,11 +21,15 @@ public class GameManager : MonoBehaviour
     public int maxEnemies;
     public int numberDeadEnemies;
     public int capacityEnemies;
-    private bool levelChanged;
     public GameObject pauseObject;
     private bool pauseIsActive;
     private bool isActive;
     [SerializeField] AudioSource alarmSound;
+    public Animator animator2;
+    private float time = 0;
+    private int count = 0;
+    private float timer = 0f;
+    private float waitTime = 10f;
 
     void Awake()
     {
@@ -42,28 +47,27 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("ONI CHAN");
         Instance.pauseIsActive = false;
-        Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
         Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
         Instance.numberEnemies = 0;
-        Instance.numberDeadEnemies = 0;
+        Instance.numberDeadEnemies = maxEnemies;
         Instance.UpdateGameState(GameState.InstructionsMenu);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
+        Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
         Instance.pauseObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
-    {;
-        bool stateInstr = Instance.currentState == GameState.InstructionsMenu;
-        bool statePause = Instance.currentState == GameState.PauseMenu;
+    {
+        Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
+        bool stateInstr = currentState == GameState.InstructionsMenu;
+        bool statePause = currentState == GameState.PauseMenu;
 
-        if (Instance.numberDeadEnemies == Instance.maxEnemies && !Instance.levelChanged && !statePause)
+        if (Instance.numberDeadEnemies == 0 && !statePause)
         {
-            Instance.levelChanged = true;
             Instance.UpdateGameState(GameState.LevelTransition);
         }
         if (Instance.numberEnemies >= Instance.capacityEnemies * 0.7 && !statePause && Instance.currentState != GameState.Warning)
@@ -93,10 +97,6 @@ public class GameManager : MonoBehaviour
             stateInstr = false;
             Instance.UpdateGameState(GameState.Alive);
         }
-        if (Instance.isActive)
-        {
-            Instance.UpdateGameState(GameState.Alive);
-        }
        
     }
 
@@ -104,7 +104,6 @@ public class GameManager : MonoBehaviour
     {
         Instance.currentState = newState;
         onStateChange?.Invoke(newState);
-        // Debug.Log(currentState);
         switch (newState)
         {
             case GameState.StartMenu:
@@ -118,20 +117,17 @@ public class GameManager : MonoBehaviour
                 if (!pauseIsActive)
                 {
                     Instance.isActive = true;
-                    Instance.currentState = GameState.Alive;
-                    onStateChange?.Invoke(Instance.currentState);
+                    Instance.UpdateGameState(GameState.Alive);
                 }
-                else
-                    Instance.isActive = false;
                 break;
             case GameState.LevelTransition:
                 Instance.currentLevel++;
+                animator2.SetBool("openDoors", false);
                 Instance.floorLevel.text = Instance.currentLevel.ToString();
                 Instance.maxEnemies = 6 * Instance.currentLevel;
                 Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
                 Instance.numberEnemies = 0;
-                Instance.numberDeadEnemies = 0;
-                Instance.UpdateGameState(GameState.Alive);
+                Invoke("Wait", 5);
                 break; 
             case GameState.Warning:
                 Time.timeScale = 1;
@@ -139,7 +135,14 @@ public class GameManager : MonoBehaviour
             case GameState.Alive:
                 Time.timeScale = 1;
                 Instance.instrMenu.SetActive(false);
-                Instance.levelChanged = false;
+                //if (!Instance.isActive)
+                //{
+                animator2.SetBool("sleeping", false);
+                animator2.SetBool("openDoors", true);
+                
+                //animator2.SetBool("openDoors", false);
+                //}
+                isActive = false;
                 break;
             case GameState.InstructionsMenu:
                 Time.timeScale = 0;
@@ -168,7 +171,6 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         Instance.pauseIsActive = false;
-        Instance.levelChanged = false;
         Instance.maxEnemies = 6;
         Instance.currentLevel = 1;
         Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
@@ -190,6 +192,11 @@ public class GameManager : MonoBehaviour
     //    Instance.UpdateGameState(GameState.StartMenu);
     //}
 
+    public void Wait()
+    {
+        Debug.Log("Waited");
+        Instance.UpdateGameState(GameState.Alive);
+    }
     public enum GameState
     {
         StartMenu,

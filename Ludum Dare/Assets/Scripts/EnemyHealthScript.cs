@@ -16,7 +16,6 @@ public class EnemyHealthScript : MonoBehaviour
     public bool canBeHit;
     bool isLeftHit = true;
     [SerializeField] AudioSource hitAudio;
-
     [SerializeField] FloatingHealthBar healthBar;
 
     [SerializeField] float bounce = 50f;
@@ -103,7 +102,7 @@ public class EnemyHealthScript : MonoBehaviour
     {
         //GetComponent<LootBag>().InstantiateLoot(transform.position);
         gameManager.numberEnemies--;
-        gameManager.numberDeadEnemies++;
+        gameManager.numberDeadEnemies--;
         transform.position.Set(transform.position.x, transform.position.y + 1, transform.position.z);
         Instantiate(particle, transform.position, transform.rotation);
         Destroy(gameObject);
