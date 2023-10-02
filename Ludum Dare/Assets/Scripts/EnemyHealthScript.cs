@@ -48,7 +48,7 @@ public class EnemyHealthScript : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) && GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime == 0)
         {
-           
+            Debug.Log(canBeHit);
             if (canBeHit)
             {
                 time = 0;

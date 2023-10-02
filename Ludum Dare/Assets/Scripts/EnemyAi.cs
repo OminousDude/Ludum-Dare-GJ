@@ -35,7 +35,7 @@ public class EnemyAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!wasAdded && transform.position.x < 3)
+        if (!wasAdded && transform.position.x < 3 && transform.position.y <= 0)
         {
             gameManager.numberEnemies++;
             wasAdded = true;

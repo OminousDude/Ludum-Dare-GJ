@@ -62,6 +62,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4216018997643699230}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4085354742304686781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6312097595551364777}
+  m_Layer: 0
+  m_Name: spawnPoint (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6312097595551364777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4085354742304686781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.95, y: 1.17, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4216018997643699230}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4451582295529334826
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +157,7 @@ Transform:
   - {fileID: 5336735816753628967}
   - {fileID: 1489112144434463574}
   - {fileID: 7061821941619697793}
+  - {fileID: 6312097595551364777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5359661026434341623
@@ -144,5 +176,10 @@ MonoBehaviour:
   - {fileID: 5336735816753628967}
   - {fileID: 1489112144434463574}
   - {fileID: 7061821941619697793}
-  enemyPrefab: {fileID: 5174689007642537048, guid: 2a7c426af7c3ba24f82a43c6ea9cc50a, type: 3}
-  enemyInterval: 1.5
+  - {fileID: 6312097595551364777}
+  enemyPrefabs:
+  - {fileID: 5174689007642537048, guid: 2a7c426af7c3ba24f82a43c6ea9cc50a, type: 3}
+  - {fileID: 5174689007642537048, guid: 5ff4e55b2f24ac34ca4c625e828d158a, type: 3}
+  - {fileID: 5174689007642537048, guid: 660b493333db195499485f563e6411dd, type: 3}
+  - {fileID: 5174689007642537048, guid: 565bae1cc8018c949a71a39fd5465096, type: 3}
+  enemyInterval: 3
