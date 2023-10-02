@@ -15,6 +15,7 @@ public class EnemyHealthScript : MonoBehaviour
     public float time;
     public bool canBeHit;
     bool isLeftHit = true;
+    [SerializeField] AudioSource hitAudio;
 
     [SerializeField] FloatingHealthBar healthBar;
 
@@ -50,6 +51,7 @@ public class EnemyHealthScript : MonoBehaviour
             time += Time.deltaTime;
             //Debug.Log(time);
             hb.SetActive(true);
+            hitAudio.Play();
             TakeDamage(1f);
             isHit = true;
             Vector2 directionVec = isLeftHit ? new Vector2(0.7f, 0.5f) : new Vector2(-0.7f, 0.5f);
