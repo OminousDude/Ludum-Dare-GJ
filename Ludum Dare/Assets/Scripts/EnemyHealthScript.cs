@@ -20,7 +20,7 @@ public class EnemyHealthScript : MonoBehaviour
 
     [SerializeField] float bounce = 50f;
     public EnemyAi enemyAi;
-
+    public Animator anim;
 
     private GameManager gameManager;
     public ParticleSystem particle;
@@ -46,6 +46,7 @@ public class EnemyHealthScript : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.E) && canBeHit)
         {
+            anim.SetBool("Attack", true);
             time = 0;
             time += Time.deltaTime;
             //Debug.Log(time);

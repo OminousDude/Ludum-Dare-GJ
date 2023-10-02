@@ -28,8 +28,12 @@ public class PlayerMovement : MonoBehaviour
 
     [Space]
 
+    private bool isGrounded;
+    private int isJumping;
+    private bool canJump;
     private bool groundTouch;
     private bool hasDashed;
+    private bool playerHit = false;
 
     public int side = 1;
 
@@ -37,7 +41,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.onStateChange += OnGameStateChange;
+        //GameManager.onStateChange += OnGameStateChange;
+        isAlive = true; 
     }
 
     private void OnGameStateChange(GameManager.GameState obj)
@@ -60,47 +65,79 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-            float xRaw = Input.GetAxisRaw("Horizontal");
-            float yRaw = Input.GetAxisRaw("Vertical");
-            Vector2 dir = new Vector2(x, y);
-
-            anim.SetBool("Walk", dir.x + dir.y == 0);
-
-            Walk(dir);
-
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetKeyDown(KeyCode.E) && !playerHit)
             {
-                if (coll.onGround)
-                    Jump(Vector2.up, false);
+                playerHit = true;
+                anim.SetBool("Attack", true);
             }
-
-            if (coll.onGround && !groundTouch)
+            else if (playerHit)
             {
-                GroundTouch();
-                groundTouch = true;
+                playerHit = false;
+                anim.SetBool("Attack", false);
             }
+                float x = Input.GetAxis("Horizontal");
+                float y = Input.GetAxis("Vertical");
+                float xRaw = Input.GetAxisRaw("Horizontal");
+                float yRaw = Input.GetAxisRaw("Vertical");
+                Vector2 dir = new Vector2(x, y);
 
-            if (!coll.onGround && groundTouch)
-            {
-                groundTouch = false;
-            }
+                anim.SetBool("Walk", dir.x + dir.y != 0);
 
-            if (x > 0)
-            {
-                side = 1;
-                GetComponent<SpriteRenderer>().flipX = true;
-            }
-            if (x < 0)
-            {
-                side = -1;
+                Walk(dir);
 
-                GetComponent<SpriteRenderer>().flipX = false;
+                if (Input.GetButtonDown("Jump"))
+                {
+                    if (isGrounded || canJump)
+                    {
+                        Jump(Vector2.up, false);
+                        canJump = false;
+                    }
+                }
+
+                if (coll.onGround && !groundTouch)
+                {
+                    GroundTouch();
+                    groundTouch = true;
+                }
+
+                if (!coll.onGround && groundTouch)
+                {
+                    groundTouch = false;
+                }
+
+                if (x > 0)
+                {
+                    side = 1;
+                    GetComponent<SpriteRenderer>().flipX = true;
+                }
+                if (x < 0)
+                {
+                    side = -1;
+
+                    GetComponent<SpriteRenderer>().flipX = false;
+                }
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.layer == 9)
+        {
+            isGrounded = true;
+            isJumping = 0;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 9)
+        {
+            isGrounded = false;
+            if (isJumping == 0)
+            {
+                canJump = true;
+                isJumping++;
             }
         }
     }
-
     void GroundTouch()
     {
         hasDashed = false;

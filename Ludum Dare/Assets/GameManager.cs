@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public GameObject gameOvrMenu;
     public GameObject buildings;
     public GameObject greenBg;
+    public GameObject startMenu;
+    public GameObject musicScene;
     public TextMeshProUGUI gameOvrScore;
     public GameState currentState;
     public static event Action<GameState> onStateChange;
@@ -27,6 +29,8 @@ public class GameManager : MonoBehaviour
     public GameObject pauseObject;
     private bool pauseIsActive;
     [SerializeField] AudioSource alarmSound;
+    [SerializeField] AudioSource menuMusic;
+    [SerializeField] AudioSource gameMusic;
     public Animator animator2;
 
     void Awake()
@@ -51,7 +55,9 @@ public class GameManager : MonoBehaviour
         Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
         Instance.numberEnemies = 0;
         Instance.numberDeadEnemies = maxEnemies;
-        Instance.UpdateGameState(GameState.InstructionsMenu);
+        Instance.UpdateGameState(GameState.StartMenu);
+        Instance.startMenu.SetActive(true);
+        Instance.musicScene.SetActive(false);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
         Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
         Instance.pauseObject.SetActive(false);
@@ -63,48 +69,66 @@ public class GameManager : MonoBehaviour
         Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
         bool stateInstr = currentState == GameState.InstructionsMenu;
         bool statePause = currentState == GameState.PauseMenu;
-
-        if (Instance.numberDeadEnemies == 0 && !statePause)
-        {
-            Instance.UpdateGameState(GameState.LevelTransition);
+        bool stateMenu = currentState == GameState.StartMenu;
+        if (stateMenu)
+        {   
+            if (!menuMusic.isPlaying)
+                menuMusic.Play();
+            gameMusic.Stop();
+            menuMusic.loop = true;
         }
-        if (Instance.numberEnemies >= Instance.capacityEnemies * 0.7 && !statePause && Instance.currentState != GameState.Warning)
+        else
         {
-            alarmSound.loop = true;
-            alarmSound.Play();
-            Instance.UpdateGameState(GameState.Warning);
+            menuMusic.Stop();
+            gameMusic.loop = true;
+            if(!gameMusic.isPlaying)
+                gameMusic.Play();
+            
+            if (Instance.numberDeadEnemies == 0 && !statePause)
+            {
+                Instance.UpdateGameState(GameState.LevelTransition);
+            }
+            if (Instance.numberEnemies >= Instance.capacityEnemies * 0.7 && !statePause && Instance.currentState != GameState.Warning)
+            {
+                alarmSound.loop = true;
+                alarmSound.Play();
+                Instance.UpdateGameState(GameState.Warning);
+            }
+            if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7 && !statePause)
+            {
+                alarmSound.loop = false;
+                Instance.UpdateGameState(GameState.Alive);
+            }
+            if (Instance.numberEnemies == Instance.capacityEnemies && !statePause)
+            {
+                alarmSound.loop = false;
+                alarmSound.Stop();
+                Instance.UpdateGameState(GameState.GameOver);
+            }
+            if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
+            {
+                Instance.UpdateGameState(GameState.PauseMenu);
+            }
+            if (Input.GetKeyDown(KeyCode.P) && stateInstr)
+            {
+                stateInstr = false;
+                Instance.UpdateGameState(GameState.Alive);
+            }
         }
-        if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7 && !statePause)
-        {
-            alarmSound.loop = false;
-            Instance.UpdateGameState(GameState.Alive);
-        }
-        if (Instance.numberEnemies == Instance.capacityEnemies && !statePause)
-        {
-            alarmSound.loop = false;
-            alarmSound.Stop();
-            Instance.UpdateGameState(GameState.GameOver);
-        }
-        if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
-        {
-            Instance.UpdateGameState(GameState.PauseMenu);
-        }
-        if (Input.GetKeyDown(KeyCode.P) && stateInstr)
-        {
-            stateInstr = false;
-            Instance.UpdateGameState(GameState.Alive);
-        }
-       
     }
 
     public void UpdateGameState(GameState newState)
     {
         Instance.currentState = newState;
         onStateChange?.Invoke(newState);
+        Debug.Log(Instance.currentState);
         switch (newState)
         {
             case GameState.StartMenu:
-                SceneManager.LoadScene("MainMenu");
+                Instance.startMenu.SetActive(true);
+                Instance.pauseObject.SetActive(false);
+                Instance.gameOvrMenu.SetActive(false);
+                Instance.musicScene.SetActive(false);
                 break;
             case GameState.PauseMenu:
                 Instance.pauseIsActive = !pauseIsActive;
@@ -136,8 +160,12 @@ public class GameManager : MonoBehaviour
                 animator2.SetBool("openDoors", true);
                 break;
             case GameState.InstructionsMenu:
+                Instance.musicScene.SetActive(true);
                 Time.timeScale = 0;
+                Instance.startMenu.SetActive(false);
                 Instance.instrMenu.SetActive(true);
+                Instance.pauseObject.SetActive(false);
+                Instance.gameOvrMenu.SetActive(false);
                 break;
             case GameState.GameOver:
                 Instance.gameOvrScore.text = "SCORE : LEVEL " + Instance.currentLevel;
@@ -181,6 +209,22 @@ public class GameManager : MonoBehaviour
         }   
         Instance.UpdateGameState(GameState.Alive);
     }   
+
+    public void home()
+    {
+        Instance.restartIsPressed();
+        Instance.UpdateGameState(GameState.StartMenu);
+    }
+
+    public void playGame()
+    {
+        Instance.UpdateGameState(GameState.InstructionsMenu);
+    }
+    public void stopGame()
+    {
+        Destroy(Instance);
+        Application.Quit();
+    }
 
     public void Wait()
     {
