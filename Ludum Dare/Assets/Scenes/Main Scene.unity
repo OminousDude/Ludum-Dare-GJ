@@ -313,6 +313,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 391747614}
+    - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
+      propertyPath: greenBg
+      value: 
+      objectReference: {fileID: 17372137}
+    - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
       propertyPath: animator
       value: 
       objectReference: {fileID: 391747625}
@@ -320,6 +328,10 @@ PrefabInstance:
       propertyPath: animator2
       value: 
       objectReference: {fileID: 371882662}
+    - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
+      propertyPath: buildings
+      value: 
+      objectReference: {fileID: 402536680}
     - target: {fileID: 8713673123494942686, guid: f79931220195e204487114bc4c53cf96, type: 3}
       propertyPath: instrMenu
       value: 
@@ -4273,7 +4285,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1231752560}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: restartIsPressed
         m_Mode: 1

@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public GameObject instrMenu;
     public GameObject player;
     public GameObject gameOvrMenu;
+    public GameObject buildings;
+    public GameObject greenBg;
     public TextMeshProUGUI gameOvrScore;
     public GameState currentState;
     public static event Action<GameState> onStateChange;
@@ -169,12 +171,14 @@ public class GameManager : MonoBehaviour
         Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
         Instance.pauseObject.SetActive(false);
         Instance.gameOvrMenu.SetActive(false);
-        //Instance.player.transform = new Vector2(-0.756, -1.496);
-        GameObject[] allObjects = GameObject.FindGameObjectsWithTag("enemy");
-        foreach (GameObject obj in allObjects)
+        Instance.player.transform.position = new Vector3(-0.756f, -1.496f, 0);
+        Instance.buildings.transform.position = new Vector3(0.718f, 3.114f, 0);
+        Instance.greenBg.transform.position = new Vector3(0.718f, 2.152f, 0);
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject obj in allEnemies)
         {
             Destroy(obj);
-        }
+        }   
         Instance.UpdateGameState(GameState.Alive);
     }   
 
