@@ -12,14 +12,13 @@ GameObject:
   - component: {fileID: 8546832338618975261}
   - component: {fileID: 334226209276172292}
   - component: {fileID: 2761804104675246229}
-  - component: {fileID: 3083842838372211598}
   - component: {fileID: 5397364468901140684}
   - component: {fileID: 4221200599522584488}
-  - component: {fileID: -6188607688192203348}
+  - component: {fileID: 794266183591063305}
   - component: {fileID: 4481118998768921234}
   - component: {fileID: 6168813774874649148}
   m_Layer: 3
-  m_Name: Enemy1
+  m_Name: Enemy4
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,9 +81,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: -405340596, guid: e5ed0fd0541206b42a4a87a6e41273d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7c91f19ebdbea1745b62f8430ee84174, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -155,20 +154,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.02047081, y: 0.0100461645}
   m_Size: {x: 0.27905878, y: 1.0552006}
   m_Direction: 0
---- !u!114 &3083842838372211598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5174689007642537048}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79d2237d94eda4f4eaeb6aad7a21efa2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shouldBounce: 1
-  rigidBody: {fileID: 334226209276172292}
 --- !u!114 &5397364468901140684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,13 +188,13 @@ MonoBehaviour:
   isHit: 0
   time: 0
   canBeHit: 0
-  hitAudio: {fileID: -6188607688192203348}
+  hitAudio: {fileID: 794266183591063305}
   healthBar: {fileID: 7489980776437995004}
-  bounce: 10
+  bounce: 0
   enemyAi: {fileID: 5397364468901140684}
-  anim: {fileID: 6168813774874649148}
+  anim: {fileID: 0}
   particle: {fileID: 2786076420750899718, guid: 91af07715e2cb6a41b8b29f3b0db2d06, type: 3}
---- !u!82 &-6188607688192203348
+--- !u!82 &794266183591063305
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,7 +204,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4b4017040d324274c9b965b285d0dba9, type: 3}
+  m_audioClip: {fileID: 8300000, guid: cacb359240316544a8f62ddc7ce84ea6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -337,11 +322,11 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.03383942, y: 0.068584085}
+  m_Offset: {x: 0.010596588, y: 0.068584085}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3125, y: 0.96875}
+    oldSize: {x: 0.64, y: 0.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -360,7 +345,7 @@ Animator:
   m_GameObject: {fileID: 5174689007642537048}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8512b65d55885674f973b097c5ec3e11, type: 2}
+  m_Controller: {fileID: 9100000, guid: 28e0069e85ca75045a60ea690acdb473, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -489,11 +474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 8.6436e-10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 86.7
+      value: 87.3
       objectReference: {fileID: 0}
     - target: {fileID: 5655234825744967697, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_Name
