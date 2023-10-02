@@ -129,13 +129,8 @@ public class GameManager : MonoBehaviour
             case GameState.Alive:
                 Time.timeScale = 1;
                 Instance.instrMenu.SetActive(false);
-                //if (!Instance.isActive)
-                //{
                 animator2.SetBool("sleeping", false);
                 animator2.SetBool("openDoors", true);
-                
-                //animator2.SetBool("openDoors", false);
-                //}
                 break;
             case GameState.InstructionsMenu:
                 Time.timeScale = 0;
@@ -168,8 +163,9 @@ public class GameManager : MonoBehaviour
         Instance.currentLevel = 1;
         Instance.capacityEnemies = Instance.maxEnemies - (Instance.maxEnemies / 3);
         Instance.numberEnemies = 0;
-        Instance.numberDeadEnemies = 0;
+        Instance.numberDeadEnemies = Instance.maxEnemies;
         Instance.floorLevel.text = Instance.currentLevel.ToString();
+        Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
         Instance.pauseObject.SetActive(false);
         Instance.gameOvrMenu.SetActive(false);
         GameObject[] allObjects = GameObject.FindGameObjectsWithTag("enemy");
@@ -179,11 +175,6 @@ public class GameManager : MonoBehaviour
         }
         Instance.UpdateGameState(GameState.Alive);
     }   
-    //public void homeIsPressed()
-    //{
-    //    Time.timeScale = 1;
-    //    Instance.UpdateGameState(GameState.StartMenu);
-    //}
 
     public void Wait()
     {
