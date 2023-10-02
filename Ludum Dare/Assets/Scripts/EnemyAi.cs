@@ -12,6 +12,7 @@ public class EnemyAi : MonoBehaviour
     Vector2 moveDirection;
     public bool grounded = false;
     GameManager gameManager;
+    bool wasAdded = false;
 
     float t = 0f;
     [SerializeField][Range(0f, 4f)] float lerpTime = 4f;
@@ -34,6 +35,12 @@ public class EnemyAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!wasAdded && transform.position.x < 3)
+        {
+            gameManager.numberEnemies++;
+            wasAdded = true;
+        }
+
         rb.transform.eulerAngles = new Vector3(0, 0, rb.transform.eulerAngles.z);
         transform.rotation.Set(transform.rotation.x, 0, transform.rotation.z, transform.rotation.w);
         if (isCorrecting) {

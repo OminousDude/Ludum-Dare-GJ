@@ -21,12 +21,12 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         GameManager.onStateChange += OnGameStateChange;
+        gameManager = GameManager.Instance;
     }
 
     private void OnGameStateChange(GameManager.GameState obj) {
         if (obj == GameManager.GameState.Alive)
         {
-            gameManager = GameManager.Instance;
             if (gameManager.numberEnemies == 0)
             {
                 spawnedEnemies = 0;
