@@ -108,14 +108,14 @@ public class EnemyHealthScript : MonoBehaviour
             gameManager.numberDeadEnemies--;
             Instantiate(particle, transform.position, transform.rotation);
             transform.position.Set(transform.position.x, transform.position.y + 1, transform.position.z);
-            Destroy(gameObject);
             Invoke("Die", 2);
         }
     }
-
+ 
     void Die()
     {
         //GetComponent<LootBag>().InstantiateLoot(transform.position);
+        Destroy(gameObject);
         Destroy(rb);
     }
 }
