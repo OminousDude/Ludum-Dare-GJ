@@ -102,34 +102,20 @@ public class EnemyHealthScript : MonoBehaviour
         healthBar.UpdateHealthBar(health, maxHealth);
         if (health <= 0)
         {
-            Animation();
-            Die();
-        }
-    }
-    void Animation()
-    {
-        if(enemyAi.gameObject.name == "Enemy1")
-        {
-            animator.SetBool("isFalling", true);
-        }    
-        else if(enemyAi.gameObject.name == "Enemy2")
-        {
-
-        }    
-        else if(enemyAi.gameObject.name == "Enemy3")
-        {
-
+            Destroy(hb);
+            anim.SetBool("isFalling", true);
+            gameManager.numberEnemies--;
+            gameManager.numberDeadEnemies--;
+            Instantiate(particle, transform.position, transform.rotation);
+            transform.position.Set(transform.position.x, transform.position.y + 1, transform.position.z);
+            Destroy(gameObject);
+            Invoke("Die", 2);
         }
     }
 
     void Die()
     {
         //GetComponent<LootBag>().InstantiateLoot(transform.position);
-        gameManager.numberEnemies--;
-        gameManager.numberDeadEnemies--;
-        transform.position.Set(transform.position.x, transform.position.y + 1, transform.position.z);
-        Instantiate(particle, transform.position, transform.rotation);
-        Destroy(gameObject);
         Destroy(rb);
     }
 }

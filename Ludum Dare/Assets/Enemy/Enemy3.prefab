@@ -192,7 +192,7 @@ MonoBehaviour:
   healthBar: {fileID: 7489980776437995004}
   bounce: 0
   enemyAi: {fileID: 5397364468901140684}
-  anim: {fileID: 0}
+  anim: {fileID: 6168813774874649148}
   particle: {fileID: 2786076420750899718, guid: 91af07715e2cb6a41b8b29f3b0db2d06, type: 3}
 --- !u!82 &794266183591063305
 AudioSource:
