@@ -22,6 +22,8 @@ public class EnemyHealthScript : MonoBehaviour
     public EnemyAi enemyAi;
     public Animator anim;
 
+    private Animator animator;
+
     private GameManager gameManager;
     public ParticleSystem particle;
     private void Awake()
@@ -46,7 +48,7 @@ public class EnemyHealthScript : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Space) && GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime == 0)
         {
-            GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime = 350;
+           
             if (canBeHit)
             {
                 time = 0;
@@ -58,7 +60,8 @@ public class EnemyHealthScript : MonoBehaviour
                 Vector2 directionVec = isLeftHit ? new Vector2(0.7f, 0.5f) : new Vector2(-0.7f, 0.5f);
                 enemyAi.grounded = false;
                 rb.AddForce(directionVec * bounce, ForceMode2D.Impulse);
-            }
+            } 
+            GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime = 350;
         }
         else if (isHit)
         {
@@ -99,9 +102,26 @@ public class EnemyHealthScript : MonoBehaviour
         healthBar.UpdateHealthBar(health, maxHealth);
         if (health <= 0)
         {
+            Animation();
             Die();
         }
     }
+    void Animation()
+    {
+        if(enemyAi.gameObject.name == "Enemy1")
+        {
+            animator.SetBool("isFalling", true);
+        }    
+        else if(enemyAi.gameObject.name == "Enemy2")
+        {
+
+        }    
+        else if(enemyAi.gameObject.name == "Enemy3")
+        {
+
+        }
+    }
+
     void Die()
     {
         //GetComponent<LootBag>().InstantiateLoot(transform.position);
