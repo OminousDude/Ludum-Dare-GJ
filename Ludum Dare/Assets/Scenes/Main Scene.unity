@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 17372139}
   - component: {fileID: 17372138}
+  - component: {fileID: 17372140}
   m_Layer: 0
   m_Name: Green Bg
   m_TagString: Untagged
@@ -201,12 +202,26 @@ Transform:
   m_GameObject: {fileID: 17372137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.718, y: 2.85, z: 0}
+  m_LocalPosition: {x: 0.718, y: 2.152, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &17372140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17372137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 662f065256a6661488f5f4c78e6a8a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 0.25
+  stopPosition: -1
 --- !u!1 &19302571
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 402536682}
   - component: {fileID: 402536681}
+  - component: {fileID: 402536683}
   m_Layer: 0
   m_Name: Buildings Bg
   m_TagString: Untagged
@@ -592,6 +608,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &402536683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 402536680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99ca1f0223ad5f2499b31d3dae1ec544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scrollSpeed: 0.5
+  stopPosition: -1.5
+  hasLeveledUp: 0
 --- !u!1001 &453158887
 PrefabInstance:
   m_ObjectHideFlags: 0
