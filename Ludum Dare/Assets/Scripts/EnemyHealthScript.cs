@@ -11,6 +11,7 @@ public class EnemyHealthScript : MonoBehaviour
     [SerializeField] float health, maxHealth = 3f;
     Rigidbody2D rb;
     public GameObject hb;
+    CapsuleCollider2D capsuleCollider;
     public bool isHit;
     public float time;
     public bool canBeHit;
@@ -28,6 +29,7 @@ public class EnemyHealthScript : MonoBehaviour
     public ParticleSystem particle;
     private void Awake()
     {
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         healthBar = GetComponentInChildren<FloatingHealthBar>();
     }
@@ -46,10 +48,10 @@ public class EnemyHealthScript : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.Space) && GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime == 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log(canBeHit);
-            if (canBeHit)
+            GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime = 350;
+            if (canBeHit)            
             {
                 time = 0;
                 time += Time.deltaTime;
@@ -61,7 +63,6 @@ public class EnemyHealthScript : MonoBehaviour
                 enemyAi.grounded = false;
                 rb.AddForce(directionVec * bounce, ForceMode2D.Impulse);
             } 
-            GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime = 350;
         }
         else if (isHit)
         {
@@ -103,12 +104,17 @@ public class EnemyHealthScript : MonoBehaviour
         if (health <= 0)
         {
             Destroy(hb);
-            anim.SetBool("isFalling", true);
+            Destroy(rb);
+            if(anim)
+                anim.SetBool("isFalling", true);
+            else {
+                Die();
+            }
             gameManager.numberEnemies--;
             gameManager.numberDeadEnemies--;
             Instantiate(particle, transform.position, transform.rotation);
             transform.position.Set(transform.position.x, transform.position.y + 1, transform.position.z);
-            Invoke("Die", 2);
+            Invoke("Die", 0.7f);
         }
     }
  
@@ -116,6 +122,6 @@ public class EnemyHealthScript : MonoBehaviour
     {
         //GetComponent<LootBag>().InstantiateLoot(transform.position);
         Destroy(gameObject);
-        Destroy(rb);
+      
     }
 }
