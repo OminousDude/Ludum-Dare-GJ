@@ -2284,7 +2284,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1.09}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -18.44, y: 9.11}
+  m_AnchoredPosition: {x: -18.18, y: 9.11}
   m_SizeDelta: {x: 226.852, y: 18.876}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1556283836
@@ -2813,6 +2813,10 @@ PrefabInstance:
     - target: {fileID: 1482453500812201420, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
       propertyPath: m_Name
       value: GameOverMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1482453500812201420, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5988862190799709344, guid: ba48c9f88b3e2d94699a515195d7f02f, type: 3}
       propertyPath: m_LocalPosition.x
