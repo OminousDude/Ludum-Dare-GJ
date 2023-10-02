@@ -6,8 +6,13 @@ public class ScrollBG2 : MonoBehaviour
 {
     public float scrollSpeed = 0.25f;
     public float stopPosition = -1f;
-
+    public GameManager gameManager;
     public bool hasLeveledUp = false;
+
+    void Start()
+    {
+        gameManager = GameManager.Instance;
+    }
 
     void Update()
     {
@@ -29,6 +34,7 @@ public class ScrollBG2 : MonoBehaviour
 
     public void LevelUp()
     {
-        hasLeveledUp = true;
+        if(gameManager.currentState == GameManager.GameState.LevelTransition)
+            hasLeveledUp = true;
     }
 }

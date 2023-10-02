@@ -18,5 +18,13 @@ public class Cloud : MonoBehaviour
         float rand = Random.Range(0.1f, 0.7f);
         scrollSpeed = rand;
         transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+
+        if (transform.position.x >= 5)
+            OnDestroy();
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(gameObject);
     }
 }

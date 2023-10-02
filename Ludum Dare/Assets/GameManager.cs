@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI enemiesLeft;
     public static GameManager Instance;
     public GameObject instrMenu;
+    public GameObject player;
     public GameObject gameOvrMenu;
     public TextMeshProUGUI gameOvrScore;
     public GameState currentState;
@@ -168,6 +169,7 @@ public class GameManager : MonoBehaviour
         Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
         Instance.pauseObject.SetActive(false);
         Instance.gameOvrMenu.SetActive(false);
+        //Instance.player.transform = new Vector2(-0.756, -1.496);
         GameObject[] allObjects = GameObject.FindGameObjectsWithTag("enemy");
         foreach (GameObject obj in allObjects)
         {
