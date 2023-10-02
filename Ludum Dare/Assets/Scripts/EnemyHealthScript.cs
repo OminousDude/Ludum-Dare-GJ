@@ -44,11 +44,11 @@ public class EnemyHealthScript : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.E) && GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime == 0)
+        if (Input.GetKeyDown(KeyCode.Space) && GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime == 0)
         {
-            GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime = 100;
-            if (canBeHit)
-            {
+            GameObject.Find("Player").GetComponentInChildren<PlayerMovement>().hitWaitTime = 350;
+            //if (canBeHit)
+            //{
                 time = 0;
                 time += Time.deltaTime;
                 //Debug.Log(time);
@@ -58,7 +58,7 @@ public class EnemyHealthScript : MonoBehaviour
                 Vector2 directionVec = isLeftHit ? new Vector2(0.7f, 0.5f) : new Vector2(-0.7f, 0.5f);
                 enemyAi.grounded = false;
                 rb.AddForce(directionVec * bounce, ForceMode2D.Impulse);
-            }
+            //}
         }
         else if (isHit)
         {

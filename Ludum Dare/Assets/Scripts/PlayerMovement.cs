@@ -87,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
 
             Walk(dir);
 
-                if (Input.GetButtonDown("Jump"))
+                if (Input.GetKeyDown(KeyCode.W))
                 {
                     if (isGrounded || canJump)
                     {
