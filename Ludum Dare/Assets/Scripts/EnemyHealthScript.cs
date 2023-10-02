@@ -94,6 +94,7 @@ public class EnemyHealthScript : MonoBehaviour
     }
     public void TakeDamage(float damageAmount)
     {
+        hitAudio.Play();
         health -= damageAmount;
         healthBar.UpdateHealthBar(health, maxHealth);
         if (health <= 0)

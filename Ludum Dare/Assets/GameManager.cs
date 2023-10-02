@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     public GameObject buildings;
     public GameObject greenBg;
     public GameObject startMenu;
-    public GameObject musicScene;
     public TextMeshProUGUI gameOvrScore;
     public GameState currentState;
     public static event Action<GameState> onStateChange;
@@ -31,6 +30,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource alarmSound;
     [SerializeField] AudioSource menuMusic;
     [SerializeField] AudioSource gameMusic;
+    [SerializeField] AudioSource gameMusic1;
+    [SerializeField] AudioSource gameMusicTransition;
+    bool isAudio1 = true;
     public Animator animator2;
 
     void Awake()
@@ -57,7 +59,6 @@ public class GameManager : MonoBehaviour
         Instance.numberDeadEnemies = maxEnemies;
         Instance.UpdateGameState(GameState.StartMenu);
         Instance.startMenu.SetActive(true);
-        Instance.musicScene.SetActive(false);
         Instance.floorLevel.text = Instance.currentLevel.ToString();
         Instance.enemiesLeft.text = "Enemies Left: " + Instance.numberDeadEnemies.ToString();
         Instance.pauseObject.SetActive(false);
@@ -75,14 +76,19 @@ public class GameManager : MonoBehaviour
             if (!menuMusic.isPlaying)
                 menuMusic.Play();
             gameMusic.Stop();
+            gameMusic1.Stop();
+            gameMusicTransition.Stop();
             menuMusic.loop = true;
         }
         else
         {
             menuMusic.Stop();
             gameMusic.loop = true;
-            if(!gameMusic.isPlaying)
+            gameMusic1.loop = true;
+            if (isAudio1 && !gameMusic.isPlaying)
+            {
                 gameMusic.Play();
+            }
             
             if (Instance.numberDeadEnemies == 0 && !statePause)
             {
@@ -90,8 +96,14 @@ public class GameManager : MonoBehaviour
             }
             if (Instance.numberEnemies >= Instance.capacityEnemies * 0.7 && !statePause && Instance.currentState != GameState.Warning)
             {
-                alarmSound.loop = true;
-                alarmSound.Play();
+                if (isAudio1) {
+                    alarmSound.loop = true;
+                    alarmSound.Play();
+                    gameMusic.Stop();
+                    gameMusicTransition.Play();
+                    gameMusic1.PlayDelayed(8);
+                    isAudio1 = false;
+                }
                 Instance.UpdateGameState(GameState.Warning);
             }
             if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7 && !statePause)
@@ -128,7 +140,6 @@ public class GameManager : MonoBehaviour
                 Instance.startMenu.SetActive(true);
                 Instance.pauseObject.SetActive(false);
                 Instance.gameOvrMenu.SetActive(false);
-                Instance.musicScene.SetActive(false);
                 break;
             case GameState.PauseMenu:
                 Instance.pauseIsActive = !pauseIsActive;
@@ -160,7 +171,6 @@ public class GameManager : MonoBehaviour
                 animator2.SetBool("openDoors", true);
                 break;
             case GameState.InstructionsMenu:
-                Instance.musicScene.SetActive(true);
                 Time.timeScale = 0;
                 Instance.startMenu.SetActive(false);
                 Instance.instrMenu.SetActive(true);
@@ -202,6 +212,9 @@ public class GameManager : MonoBehaviour
         Instance.player.transform.position = new Vector3(-0.756f, -1.496f, 0);
         Instance.buildings.transform.position = new Vector3(0.718f, 3.114f, 0);
         Instance.greenBg.transform.position = new Vector3(0.718f, 2.152f, 0);
+        isAudio1 = true;
+        gameMusic.Stop();
+        gameMusic1.Stop();
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("enemy");
         foreach (GameObject obj in allEnemies)
         {
