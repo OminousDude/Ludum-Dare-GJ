@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     public int side = 1;
 
     public Animator anim;
+    public float hitWaitTime;
 
     private void Awake()
     {
@@ -65,25 +66,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isAlive)
         {
-            if (Input.GetKeyDown(KeyCode.E) && !playerHit)
-            {
-                playerHit = true;
-                anim.SetBool("Attack", true);
-            }
-            else if (playerHit)
-            {
-                playerHit = false;
-                anim.SetBool("Attack", false);
-            }
                 float x = Input.GetAxis("Horizontal");
                 float y = Input.GetAxis("Vertical");
                 float xRaw = Input.GetAxisRaw("Horizontal");
                 float yRaw = Input.GetAxisRaw("Vertical");
                 Vector2 dir = new Vector2(x, y);
 
-                anim.SetBool("Walk", dir.x + dir.y != 0);
+                anim.SetBool("Walk", dir.x + dir.y != 0 && hitWaitTime == 0);
 
-                Walk(dir);
+                if (hitWaitTime == 0)
+                {
+                    anim.SetBool("Hit", false);
+                }
+
+                if (hitWaitTime != 0)
+                {
+                    anim.SetBool("Hit", true);
+                    hitWaitTime--;
+                }
+
+            Walk(dir);
 
                 if (Input.GetButtonDown("Jump"))
                 {

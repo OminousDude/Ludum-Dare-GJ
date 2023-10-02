@@ -97,7 +97,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6462064319337000757}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -148,8 +148,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.016320944, y: 0.01910901}
-  m_Size: {x: 0.35419512, y: 0.99700975}
+  m_Offset: {x: 0.016320944, y: -0.00002503395}
+  m_Size: {x: 0.35419512, y: 1.0352778}
   m_Direction: 0
 --- !u!114 &6737077741208942357
 MonoBehaviour:
@@ -200,6 +200,7 @@ MonoBehaviour:
   isDashing: 0
   side: 1
   anim: {fileID: 4424774393420845180}
+  hitWaitTime: 0
 --- !u!95 &4424774393420845180
 Animator:
   serializedVersion: 5
