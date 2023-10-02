@@ -73,21 +73,21 @@ public class GameManager : MonoBehaviour
         bool stateMenu = currentState == GameState.StartMenu;
         if (stateMenu)
         {   
-            if (!menuMusic.isPlaying)
-                menuMusic.Play();
-            gameMusic.Stop();
-            gameMusic1.Stop();
-            gameMusicTransition.Stop();
-            menuMusic.loop = true;
+            if (!Instance.menuMusic.isPlaying)
+                Instance.menuMusic.Play();
+            Instance.gameMusic.Stop();
+            Instance.gameMusic1.Stop();
+            Instance.gameMusicTransition.Stop();
+            Instance.menuMusic.loop = true;
         }
         else
         {
-            menuMusic.Stop();
-            gameMusic.loop = true;
-            gameMusic1.loop = true;
-            if (isAudio1 && !gameMusic.isPlaying)
+            Instance.menuMusic.Stop();
+            Instance.gameMusic.loop = true;
+            Instance.gameMusic1.loop = true;
+            if (Instance.isAudio1 && !Instance.gameMusic.isPlaying)
             {
-                gameMusic.Play();
+                Instance.gameMusic.Play();
             }
             
             if (Instance.numberDeadEnemies == 0 && !statePause)
@@ -96,25 +96,26 @@ public class GameManager : MonoBehaviour
             }
             if (Instance.numberEnemies >= Instance.capacityEnemies * 0.7 && !statePause && Instance.currentState != GameState.Warning)
             {
+                if (!Instance.alarmSound.isPlaying)
+                    Instance.alarmSound.Play();
+
                 if (isAudio1) {
-                    alarmSound.loop = true;
-                    alarmSound.Play();
-                    gameMusic.Stop();
-                    gameMusicTransition.Play();
-                    gameMusic1.PlayDelayed(8);
-                    isAudio1 = false;
+                    Instance.gameMusic.Stop();
+                    Instance.gameMusicTransition.Play();
+                    Instance.gameMusic1.PlayDelayed(8);
+                    Instance.isAudio1 = false;
                 }
                 Instance.UpdateGameState(GameState.Warning);
             }
             if (Instance.currentState == GameState.Warning && Instance.numberEnemies < Instance.capacityEnemies * 0.7 && !statePause)
             {
-                alarmSound.loop = false;
+                Instance.alarmSound.loop = false;
                 Instance.UpdateGameState(GameState.Alive);
             }
             if (Instance.numberEnemies == Instance.capacityEnemies && !statePause)
             {
-                alarmSound.loop = false;
-                alarmSound.Stop();
+                Instance.alarmSound.loop = false;
+                Instance.alarmSound.Stop();
                 Instance.UpdateGameState(GameState.GameOver);
             }
             if (Input.GetKeyDown(KeyCode.Escape) && !stateInstr)
@@ -212,14 +213,15 @@ public class GameManager : MonoBehaviour
         Instance.player.transform.position = new Vector3(-0.756f, -1.496f, 0);
         Instance.buildings.transform.position = new Vector3(0.718f, 3.114f, 0);
         Instance.greenBg.transform.position = new Vector3(0.718f, 2.152f, 0);
-        isAudio1 = true;
-        gameMusic.Stop();
-        gameMusic1.Stop();
+        Instance.isAudio1 = true;
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("enemy");
         foreach (GameObject obj in allEnemies)
         {
             Destroy(obj);
-        }   
+        }
+        Instance.gameMusic.Stop();
+        Instance.gameMusic1.Stop();
+        Instance.gameMusicTransition.Stop();
         Instance.UpdateGameState(GameState.Alive);
     }   
 
