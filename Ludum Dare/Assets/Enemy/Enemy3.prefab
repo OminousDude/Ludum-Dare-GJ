@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4481118998768921234}
   - component: {fileID: 6168813774874649148}
   m_Layer: 3
-  m_Name: Enemy1
+  m_Name: Enemy3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
-  m_Sprite: {fileID: -405340596, guid: e5ed0fd0541206b42a4a87a6e41273d1, type: 3}
+  m_Sprite: {fileID: 168620452, guid: 5a770a5e7358b4649ae5111c0dbfd377, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -227,7 +227,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3125, y: 0.96875}
+    oldSize: {x: 0.28125, y: 0.984375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -246,7 +246,7 @@ Animator:
   m_GameObject: {fileID: 5174689007642537048}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8512b65d55885674f973b097c5ec3e11, type: 2}
+  m_Controller: {fileID: 9100000, guid: e3cbca3254766844cac1bca96d0de5ea, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -375,11 +375,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 8.6436e-10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5245603911779869526, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 86.7
+      value: 87.3
       objectReference: {fileID: 0}
     - target: {fileID: 5655234825744967697, guid: c03fec19553c7604abb02ba3b8cc76d7, type: 3}
       propertyPath: m_Name

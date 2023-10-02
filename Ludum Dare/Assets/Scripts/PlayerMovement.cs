@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     public Animator anim;
 
+    public float hitWaitTime;
+
     private void Awake()
     {
         GameManager.onStateChange += OnGameStateChange;
@@ -67,7 +69,18 @@ public class PlayerMovement : MonoBehaviour
             float yRaw = Input.GetAxisRaw("Vertical");
             Vector2 dir = new Vector2(x, y);
 
-            anim.SetBool("Walk", dir.x + dir.y == 0);
+
+            anim.SetBool("Walk", (dir.x + dir.y != 0) && hitWaitTime == 0);
+
+            if(hitWaitTime == 0) {
+                anim.SetBool("Hit", false);
+            }
+
+            if (hitWaitTime != 0) {
+                anim.SetBool("Hit", true);
+                hitWaitTime--;
+            }
+
 
             Walk(dir);
 
